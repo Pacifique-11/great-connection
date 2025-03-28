@@ -31,8 +31,36 @@ const HeroSection = () => {
           {/* Dropdown Select */}
           <select className="px-4 py-2 sm:py-3 bg-white border-l text-gray-800 outline-none w-full sm:w-auto">
             <option>Select Location</option>
-            <option>Kigali</option>
+            <option>Gasabo</option>
+            <option>Nyarugenge</option>
+            <option>Kicukiro</option>
+            <option>Nyagatare</option>
+            <option>Gatsibo</option>
+            <option>Rusizi</option>
+            <option>Nyamasheke</option>
+            <option>Karongi</option>
+            <option>Rutsiro</option>
+            <option>Ngororero</option>
+            <option>Rubavu</option>
+            <option>Huye</option>
+            <option>Kamonyi</option>
+            <option>Gakenke</option>
+            <option>Musanze</option>
+            <option>Burera</option>
+            <option>Gicumbi</option>
+            <option>Rulindo</option>
+            <option>Nyabihu</option>
+            <option>Nyamagabe</option>
+            <option>Ngoma</option>
+            <option>Rwamagana</option>
+            <option>Kayonza</option>
             <option>Bugesera</option>
+            <option>Gatsibo</option>
+            <option>Ruhango</option>
+           <option>Nyanza</option> 
+           <option>Nyaruguru</option>
+           <option>Gisagara</option>
+
           </select>
 
           {/* Search Button */}
