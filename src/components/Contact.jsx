@@ -100,7 +100,6 @@ const Contact = () => {
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-green-500 p-4 rounded-full shadow-lg hover:bg-green-600 transition"
       >
-        <IoLogoWhatsapp className="text-white text-3xl" />
       </a>
     </div>
   )

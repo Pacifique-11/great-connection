@@ -98,17 +98,17 @@ export const NavBar = () => {
                <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy House
               </Link>
-              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+              <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy Apartment
               </Link>
-              <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600
+              <Link to="/buy-car" className="block px-4 py-2 hover:bg-green-600
                hover:text-white">
                 Buy Car
               </Link>
-              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+              <Link to="/buy-motorcycle" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy motorcycle
               </Link>
-              <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600
+              <Link to="/buy-other-properties" className="block px-4 py-2 hover:bg-green-600
                hover:text-white">
                 Buy other properties
               </Link>
