@@ -1,0 +1,10 @@
+.list-circle li::before{
+	content: "";
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	/* background-color: hsl(135, 83%, 47%); */
+	border-radius: 50%;
+	margin-right: 10px;
+	border: 1px solid hsl(135, 83%, 47%);
+}

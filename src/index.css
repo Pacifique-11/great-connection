@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+html,body{
+	font-family: serif, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+.custom-select {
+	background-color: #16a34a; /* Green */
+	color: white;
+	border: none;
+  }
+  
+  /* This targets the dropdown options */
+  .custom-select option {
+	background-color: #16a34a !important; /* Green */
+	color: white !important;
+  }
+  
+  /* Remove the blue highlight on selection */
+  .custom-select:focus {
+	outline: none;
+	box-shadow: none;
+  }
+  
