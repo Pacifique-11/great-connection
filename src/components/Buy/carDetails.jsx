@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import carListings from "../assets/carData"; // Import car data
 import { FaCar, FaLocationArrow } from "react-icons/fa";
 
 const CarDetail = () => {
   const { id } = useParams();
-  const [car, setCar] = useState(null);
+  const [car, ] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,8 +14,9 @@ const CarDetail = () => {
   });
 
   useEffect(() => {
-    const foundCar = carListings.find((c) => c.id.toString() === id);
-    setCar(foundCar);
+    // Fetch car data dynamically from API or state management
+    // Example: Replace this with actual fetching logic
+    // fetch(`/api/cars/${id}`).then(res => res.json()).then(data => setCar(data));
   }, [id]);
 
   if (!car) {
@@ -38,17 +38,22 @@ const CarDetail = () => {
 
   return (
     <div className="container mx-auto p-6 mt-20">
-      {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-gray-600 my-6">
         <FaCar /> <Link to="/" className="text-gray-500">Home</Link> 
         <span className="text-gray-500 text-xl">/</span> 
         <span className="text-gray-800">{car.name}</span>
       </div>
 
-      {/* Car Details */}
       <div className="flex justify-between items-center text-xl font-bold">
         <h1 className="text-3xl">{car.name}</h1>
         <h3 className="text-bold font-bold text-2xl">RwF {car.price}</h3>
+      </div>
+      <div className="m-4">
+        <button className="bg-green-500 text-white py-2 px-4 text-sm rounded-lg">FOR SALE</button>
+        <div className="p-4 flex items-center gap-2 text-gray-600">
+          <FaLocationArrow />
+          <span>{car.location}</span>
+        </div>
       </div>
 
       <img src={car.image} alt={car.name} className="w-full h-[400px] object-cover mt-4 rounded-md" />
@@ -58,9 +63,13 @@ const CarDetail = () => {
         <p className="text-gray-700 text-lg">⚡ <strong>Fuel Type:</strong> {car.fuel}</p>
         <p className="text-gray-700 text-lg">📜 <strong>Status:</strong> {car.status}</p>
         <p className="text-gray-700 text-lg">🛡 <strong>Warranty:</strong> {car.warranty}</p>
+        <p className="text-gray-700 text-lg">✅ <strong>Certified:</strong> {car.certified ? "Yes" : "No"}</p>
+        <p className="text-gray-700 text-lg">🔍 <strong>Inspected:</strong> {car.inspected ? "Yes" : "No"}</p>
+        <p className="text-gray-700 text-lg">📍 <strong>Location:</strong> {car.location}</p>
+        <p className="text-gray-700 text-lg">👤 <strong>Owner:</strong> {car.owner}</p>
+        <p className="text-gray-700 text-lg">📞 <strong>Contact:</strong> {car.contact}</p>
       </div>
 
-      {/* Contact Form */}
       <div className="my-12 p-6 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">
         <h1 className="text-xl font-bold">Contact Seller</h1>
         <form onSubmit={handleSubmit} className="mt-4">

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import car1 from '../../assets/car1.jpg'
 import car2 from '../../assets/car2.jpg'
 import car3 from '../../assets/car3.jpg'
@@ -74,9 +75,11 @@ const BuyCar = () => {
           <div className="flex justify-between items-center mt-4">
             <button className="text-gray-500 hover:text-gray-700">♡</button>
             <button className="text-gray-500 hover:text-gray-700">🔗</button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            <Link to={`/car/${car.id}`}>
+            <button  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
               View Details
             </button>
+            </Link>
           </div>
         </div>
       ))}

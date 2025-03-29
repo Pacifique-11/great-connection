@@ -7,7 +7,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home'
 import PropertyDetail from './pages/PropertyDetail';
+import CarDetail from './components/Buy/carDetails';
 import SupplyProperty from './components/SupplyProperty';
+import RequestProperty from './components/RequestProperty';
 import BuyApartment from './components/Buy/BuyApartment';
 import BuyHouse from './components/Buy/BuyHouse';
 import BuyCar from './components/Buy/BuyCar';
@@ -30,7 +32,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/supply-property" element={<SupplyProperty />} />
+        <Route path="/request-property" element={<RequestProperty />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
+        <Route path="/car/:id" element={<CarDetail />} />
         <Route path="/buy-apartment" element={<BuyApartment />} />
         <Route path="/buy-house" element={<BuyHouse />} />
         <Route path="/buy-car" element={<BuyCar />} />
