@@ -1,10 +1,41 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
 import { BsWhatsapp } from "react-icons/bs";
-
-
+import  axios from 'axios';
+ 
 const Footer = () => {
+	const [email, setEmail] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [message, setMessage] = useState('');
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		try {
+			const res = await axios.post('https://easy-renting-bn.onrender.com/api/subscribe', {email});
+	
+			if (res.status === 201) {
+				setMessage(res.data.message);
+				setEmail('');
+
+			}
+			setLoading(false);
+		} catch (error) {
+			 if (error.response) {
+     
+      setMessage(error.response.data.message || 'Subscription failed. Please try again later.');
+    } else {
+      setMessage('Subscription failed. Please try again later.');
+    }
+    setTimeout(() => {
+      setMessage('');
+    }, 5000); 
+  } finally {
+    setLoading(false); 
+  }
+		  
+	}
+ 
   return (
 	<footer className="bg-[#002F47] text-white py-10 px-6 md:px-16">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -40,19 +71,28 @@ const Footer = () => {
         <div className="space-y-6">
           {/* Newsletter */}
           <div>
+			
             <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2">
               Newsletter
             </h3>
             <p className="text-sm text-gray-300 mt-2">Email address</p>
-            <input
+			<form action="" onSubmit={handleSubmit}>
+			<input
               type="email"
               placeholder="Enter your email"
               className="w-full px-3 py-2 mt-2 rounded-md bg-white text-gray-800"
+			  onChange={(e) => setEmail(e.target.value)}
             />
-            <button className="mt-2 w-full bg-green-400 border-green-700 text-white py-2 rounded-md
-			 hover:green-800 transition cursor-pointer ">
-              SUBSCRIBE
-            </button>
+            <button
+          type="submit"
+          className="mt-2 w-full bg-green-400 border-green-700 text-white py-2 rounded-md hover:bg-green-800 transition cursor-pointer"
+          
+        >
+         {loading ? 'Please wait!......' : 'Subscribe'}
+        </button>
+			</form>
+
+           {message && <h3 className="text-xs text-green-400 mt-1">{message}</h3>}
             <p className="text-xs text-gray-400 mt-1">We never spam you!</p>
           </div>
 
