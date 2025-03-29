@@ -64,12 +64,25 @@ export const NavBar = () => {
           </button>
           {dropdown === "rent" && (
             <div className="absolute bg-white shadow-md mt-2 w-48">
-              <Link to="/rent-house" className="block px-4 py-2 hover:text-green-800">
+
+              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Rent House
               </Link>
-              <Link to="/rent-apartment" className="block px-4 py-2 hover:text-green-800">
+              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Rent Apartment
               </Link>
+               
+              <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600
+               hover:text-white">
+                Rent Car
+              </Link>
+              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+                Rent motorcycle
+              </Link>
+              <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+                Rent other properties
+              </Link>
+              
             </div>
           )}
         </div>
@@ -82,18 +95,29 @@ export const NavBar = () => {
           </button>
           {dropdown === "buy" && (
             <div className="absolute bg-white shadow-md mt-2 w-48">
-              <Link to="/buy-house" className="block px-4 py-2 hover:text-green-800">
+               <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy House
               </Link>
-              <Link to="/buy-apartment" className="block px-4 py-2 hover:text-green-800">
+              <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy Apartment
+              </Link>
+              <Link to="/buy-car" className="block px-4 py-2 hover:bg-green-600
+               hover:text-white">
+                Buy Car
+              </Link>
+              <Link to="/buy-motorcycle" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+                Buy motorcycle
+              </Link>
+              <Link to="/buy-other-properties" className="block px-4 py-2 hover:bg-green-600
+               hover:text-white">
+                Buy other properties
               </Link>
             </div>
           )}
         </div>
 
-        <Link to="/request-property" className="hover:text-green-800">
-          Request a Property
+        <Link to="/supply-property" className="hover:text-green-800">
+          Supply Property
         </Link>
 
         <Link to="/contact" className="hover:text-green-800">
