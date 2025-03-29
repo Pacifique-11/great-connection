@@ -61,7 +61,7 @@ const BuyCar = () => {
             </span>
           </div>
           <h3 className="text-lg font-bold mt-2">{car.name}</h3>
-          <p className="text-blue-600 text-xl font-bold">{car.price}</p>
+          <p className="text-green-600 text-xl font-bold">{car.price}</p>
           <div className="flex items-center text-gray-600 text-sm mt-2">
             <span className="mr-4">⚙ {car.transmission}</span>
             <span>⛽ {car.fuel}</span>
@@ -74,7 +74,7 @@ const BuyCar = () => {
           <div className="flex justify-between items-center mt-4">
             <button className="text-gray-500 hover:text-gray-700">♡</button>
             <button className="text-gray-500 hover:text-gray-700">🔗</button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
               View Details
             </button>
           </div>
