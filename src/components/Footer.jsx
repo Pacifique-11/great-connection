@@ -2,6 +2,7 @@ import React from 'react'
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
 import { BsWhatsapp } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 
 const Footer = () => {
@@ -11,7 +12,7 @@ const Footer = () => {
         
         <div>
           <h2 className="text-2xl font-bold flex items-center">
-            <span className="text-green-700">GREAT CONNECTION BUSINESS GROUP</span>
+            <span className="text-white">GREAT CONNECTION BUSINESS GROUP</span>
           </h2>
           <p className="mt-4 text-gray-300 text-sm">
             Are you considering investing in real estate in Rwanda? great connection business group
@@ -27,12 +28,11 @@ const Footer = () => {
             Quick Links
           </h3>
           <ul className="mt-4 space-y-2 text-gray-300 text-sm">
-            <li>About us</li>
-            <li>Neighborhoods</li>
-            <li>Blog</li>
-            <li>FAQs (Frequently Asked Questions)</li>
-            <li>Sell your property</li>
-            <li>Real Estate Investment Calculator</li>
+           <li> <Link to='/contact'>Contact</Link></li> 
+           <li>  <Link to='request-property'>Request Property</Link></li> 
+           <li> <Link to='supply-property'>Supply Property</Link></li> 
+           <li> <Link to='register'>Register</Link></li> 
+           <li> <Link to='login'>Login</Link></li> 
           </ul>
         </div>
 
@@ -63,15 +63,34 @@ const Footer = () => {
             </h3>
             <p className="flex items-center mt-2 text-gray-300">
               <IoLocationSharp className="mr-2 border-green-700" />
-              Ikaze House 1st Floor, Remera Kigali
+              <a 
+                href="https://www.google.com/maps?q=Nyarugenge,UR-CST" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-green-500"
+              >
+                Nyarugenge, UR-CST
+              </a>
             </p>
             <p className="flex items-center mt-2 text-gray-300">
               <IoMail className="mr-2 border-green-700" />
-              business@quick.rw
+              <a 
+                href="https://mail.google.com/mail/?view=cm&to=juniorally910@gmail.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-green-500"
+              >
+                juniorally910@gmail.com
+              </a>
             </p>
             <p className="flex items-center mt-2 text-gray-300">
               <IoCall className="mr-2 border-green-700" />
-              +250 785 711 348
+              <a 
+                href="tel:+250785711348" 
+                className="hover:text-green-500"
+              >
+                +250 785 711 348
+              </a>
             </p>
           </div>
         </div>
