@@ -57,7 +57,7 @@ const SupplyProperty = () => {
           <input type="text" name="features" className="border p-2 rounded w-full" placeholder="Features (comma separated)" onChange={handleChange} />
         </div>
         <textarea name="description" placeholder="Property Description" className="border p-2 rounded w-full" onChange={handleChange}></textarea>
-        <input type="file" onChange={handleImageUpload} className="border p-2 rounded w-full" />
+        <input type="file" onChange={handleImageUpload} className="border p-2 rounded w-full cursor-pointer"  />
         <button type="submit" className="bg-green-500 text-white p-2 rounded w-full hover:bg-blue-600">Submit</button>
       </form>
     </div>

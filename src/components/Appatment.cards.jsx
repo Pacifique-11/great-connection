@@ -5,6 +5,18 @@ import { Link } from 'react-router-dom';
 import Properties from '../assets/property';
 
 const ApartmentCards = () => {
+
+
+
+
+
+
+
+
+
+
+
+	
   return (
     <div className="flex flex-wrap gap-6 justify-center py-6">
       {Properties.map((property) => (
