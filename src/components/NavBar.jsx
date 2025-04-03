@@ -150,6 +150,9 @@ export const NavBar = () => {
                 <Link to="/rent-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Rent House
               </Link>
+              <Link to="/rent-hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+                Rent Hotel
+              </Link>
               <Link to="/rent-apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Rent Apartment
               </Link>
@@ -180,6 +183,9 @@ export const NavBar = () => {
               <div className="pl-5">
                 <Link to="/buy-house" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy House
+              </Link>
+              <Link to="/buy-hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
+                Buy Hotel
               </Link>
               <Link to="/buy-apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white">
                 Buy Apartment
