@@ -5,10 +5,11 @@ import arrow from '../../src/assets/down-arrow.png';
 
 export const NavBar = () => {
 
+
 	const [isOpen, setIsOpen] = useState(false); // Mobile menu state
 	const [dropdown, setDropdown] = useState(null); // Dropdown state
 
-	// Toggle mobile menu
+
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 		setDropdown(null); // Close any open dropdowns when menu is toggled
