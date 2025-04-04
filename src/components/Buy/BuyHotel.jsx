@@ -10,7 +10,7 @@ const BuyHotel = () => {
     <div className="flex flex-wrap gap-6 justify-center py-6 mt-20">
     {Properties.map((property) => (
       <div key={property.id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-4 bg-white">
-        {/* Property Image and Status */}
+        
         <div className="relative">
           <img className="w-full h-48 object-cover rounded-md" src={hotel} alt={property.title} />
           <span className="absolute inset-0 flex justify-center items-center">
@@ -27,7 +27,6 @@ const BuyHotel = () => {
           </span>
         </div>
 
-        {/* Property Details */}
         <div className="p-4">
           <h3 className="text-lg font-bold text-gray-800 mt-1">{property.price}</h3>
           <p className="text-gray-600 text-sm mt-1">{property.description.substring(0, 80)}...</p>
