@@ -35,7 +35,7 @@ const SupplyProperty = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
       <h2 className="text-2xl font-bold mb-4 text-center">SUPPLY PROPERTY</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
