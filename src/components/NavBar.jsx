@@ -4,8 +4,11 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import arrow from '../../src/assets/down-arrow.png';
 
 export const NavBar = () => {
-	const [isOpen, setIsOpen] = useState(false); 
-	const [dropdown, setDropdown] = useState(null); 
+
+
+	const [isOpen, setIsOpen] = useState(false); // Mobile menu state
+	const [dropdown, setDropdown] = useState(null); // Dropdown state
+
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);

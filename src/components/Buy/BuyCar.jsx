@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import car1 from '../../assets/car1.jpg'
 import car2 from '../../assets/car2.jpg'
 import car3 from '../../assets/car3.jpg'
@@ -43,6 +44,12 @@ const carListings = [
   ];
 
 const BuyCar = () => {
+  const navigate = useNavigate();
+
+  const handleDetailClick = (id) => {
+    navigate(`/car/${id}`);
+  };
+
   return (
     <div className='mt-30 p-4'>
          <h1 className="text-2xl font-bold text-gray-800">New cars</h1>
@@ -74,8 +81,11 @@ const BuyCar = () => {
           <div className="flex justify-between items-center mt-4">
             <button className="text-gray-500 hover:text-gray-700">♡</button>
             <button className="text-gray-500 hover:text-gray-700">🔗</button>
-            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-              View Details
+            <button
+              onClick={() => handleDetailClick(car.id)}
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            >
+              Detail
             </button>
           </div>
         </div>

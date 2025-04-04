@@ -33,7 +33,7 @@ const ApartmentCards = () => {
 				  <MdCropSquare /> <span>{property.area}</span>
 				</div>
 			  </div>
-			  <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+			  <button className="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">
 				Details
 			  </button>
 			</div>

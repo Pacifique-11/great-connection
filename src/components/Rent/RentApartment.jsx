@@ -6,7 +6,7 @@ import Properties from '../../assets/property';
 
 const RentApartment = () => {
   return (
-    <div className="flex flex-wrap gap-6 justify-center py-6">
+    <div className="flex flex-wrap gap-6 justify-center py-6 mt-20">
       {Properties.map((property) => (
         <div key={property.id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-4 bg-white">
           {/* Property Image and Status */}
