@@ -1,38 +1,76 @@
 import React from 'react';
 import { useState } from 'react';
-
+import axios from "axios";
 const SupplyProperty = () => {
-  const [formData, setFormData] = useState({
-    id: "",
-    title: "",
-    price: "",
-    status: "",
-    location: "",
-    owner: "",
-    contact: "",
-    description: "",
-    bedrooms: "",
-    bathrooms: "",
-    toilets: "",
-    area: "",
-    type: "",
-    features: "",
-    timeAgo: "",
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleImageUpload = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-  };
+	const [formData, setFormData] = useState({
+		id: "",
+		title: "",
+		price: "",
+		status: "",
+		location: "",
+		requesterName: "",
+		contact: "",
+		description: "",
+		bedrooms: "",
+		bathrooms: "",
+		toilets: "",
+		area: "",
+		type: "",
+		features: "",
+		timeAgo: "",
+		image: null,
+	  });  
+	
+	  const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	  };
+	
+	  const handleImageUpload = (e) => {
+		setFormData({ ...formData, image: e.target.files[0] });
+	  };
+	  const handleSubmit = async (e) => {
+		e.preventDefault();
+	  
+		try {
+		  const data = new FormData();
+		  Object.entries(formData).forEach(([key, value]) => {
+			if (value) data.append(key, value);
+		  });
+	  
+		  const res = await axios.post("https://easy-renting-bn.onrender.com/api/supply-property", data, {
+			headers: {
+			  "Content-Type": "multipart/form-data",
+			},
+		  });
+	  
+		  console.log("Success:", res.data);
+		  alert("supplied submitted successfully!");
+	  
+		  setFormData({
+			id: "",
+			title: "",
+			price: "",
+			status: "",
+			location: "",
+			requesterName: "",
+			contact: "",
+			description: "",
+			bedrooms: "",
+			bathrooms: "",
+			toilets: "",
+			area: "",
+			type: "",
+			features: "",
+			timeAgo: "",
+			image: null,
+		  });
+	  
+		} catch (error) {
+		  console.error("Error submitting request:", error.response?.data || error.message);
+		  alert("Something went wrong while submitting the request.");
+		}
+	  };
+	
 
   return (
     <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
@@ -57,7 +95,7 @@ const SupplyProperty = () => {
           <input type="text" name="features" className="border p-2 rounded w-full" placeholder="Features (comma separated)" onChange={handleChange} />
         </div>
         <textarea name="description" placeholder="Property Description" className="border p-2 rounded w-full" onChange={handleChange}></textarea>
-        <input type="file" onChange={handleImageUpload} className="border p-2 rounded w-full cursor-pointer"  />
+        <input type="file" onChange={handleImageUpload} name="image" className="border p-2 rounded w-full cursor-pointer"  />
         <button type="submit" className="bg-green-500 text-white p-2 rounded w-full hover:bg-blue-600">Submit</button>
       </form>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-
+import axios from "axios"; 
 const RequestProperty = () => {
   const [formData, setFormData] = useState({
     id: "",
@@ -19,7 +19,7 @@ const RequestProperty = () => {
     features: "",
     timeAgo: "",
     image: null,
-  });
+  });  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,11 +28,49 @@ const RequestProperty = () => {
   const handleImageUpload = (e) => {
     setFormData({ ...formData, image: e.target.files[0] });
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Request Data Submitted:", formData);
+  const handleSubmit = async (e) => {
+	e.preventDefault();
+  
+	try {
+	  const data = new FormData();
+	  Object.entries(formData).forEach(([key, value]) => {
+		if (value) data.append(key, value);
+	  });
+  
+	  const res = await axios.post("https://easy-renting-bn.onrender.com/api/request-property", data, {
+		headers: {
+		  "Content-Type": "multipart/form-data",
+		},
+	  });
+  
+	  console.log("Success:", res.data);
+	  alert("Request submitted successfully!");
+  
+	  setFormData({
+		id: "",
+		title: "",
+		price: "",
+		status: "",
+		location: "",
+		requesterName: "",
+		contact: "",
+		description: "",
+		bedrooms: "",
+		bathrooms: "",
+		toilets: "",
+		area: "",
+		type: "",
+		features: "",
+		timeAgo: "",
+		image: null,
+	  });
+  
+	} catch (error) {
+	  console.error("Error submitting request:", error.response?.data || error.message);
+	  alert("Something went wrong while submitting the request.");
+	}
   };
+
 
   return (
     <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
@@ -57,7 +95,7 @@ const RequestProperty = () => {
           <input type="text" name="features" className="border p-2 rounded w-full" placeholder="Desired Features (comma separated)" onChange={handleChange} />
         </div>
         <textarea name="description" placeholder="Additional Requirements" className="border p-2 rounded w-full" onChange={handleChange}></textarea>
-        <input type="file"  accept="image/*" onChange={handleImageUpload} className="border p-2 rounded w-full" />
+        <input type="file"  accept="image/*" onChange={handleImageUpload}  name="image" className="border p-2 rounded w-full" />
         <button type="submit" className="bg-green-500 text-white p-2 rounded w-full hover:bg-green-600">Submit Request</button>
       </form>
     </div>

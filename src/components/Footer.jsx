@@ -16,10 +16,12 @@ const Footer = () => {
 	
 			if (res.status === 201) {
 				setMessage(res.data.message);
-				setEmail('');
+				setEmail(''); // Clear the email field immediately after success
 
 			}
-			setLoading(false);
+			setTimeout(() => {
+				setMessage(''); 
+			  }, 5000); 
 		} catch (error) {
 			 if (error.response) {
      
@@ -28,10 +30,11 @@ const Footer = () => {
       setMessage('Subscription failed. Please try again later.');
     }
     setTimeout(() => {
-      setMessage('');
+      setMessage(''); // Clear the message after 5 seconds
+      setEmail(''); // Clear the email field after 5 seconds
     }, 5000); 
   } finally {
-    setLoading(false); 
+    setLoading(false); // Stop the loading state
   }
 		  
 	}
@@ -88,7 +91,7 @@ const Footer = () => {
           className="mt-2 w-full bg-green-400 border-green-700 text-white py-2 rounded-md hover:bg-green-800 transition cursor-pointer"
           
         >
-         {loading ? 'Please wait!......' : 'Subscribe'}
+         {loading ? 'Please wait......!' : 'Subscribe'}
         </button>
 			</form>
 
@@ -125,7 +128,7 @@ const Footer = () => {
           <FaYoutube className="text-xl border-green-700 cursor-pointer" />
         </div>
     
-	   <a href="https://wa.me/+250783908965" target='_blank' >
+	   <a href="https://wa.me/+250785934003" target='_blank' >
         <div className="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-full cursor-pointer shadow-lg">
           <BsWhatsapp className="text-2xl" />
         </div>
