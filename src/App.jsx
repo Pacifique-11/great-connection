@@ -8,6 +8,8 @@ import Register from './components/Register';
 import Home from './components/Home'
 import PropertyDetail from './pages/PropertyDetail';
 import CarDetail from './components/Buy/carDetails';
+import ClothesDetails from './components/Buy/ClothesDetails';
+import LandDetails from './components/Buy/LandDetails';
 import SupplyProperty from './components/SupplyProperty';
 import RequestProperty from './components/RequestProperty';
 import BuyApartment from './components/Buy/BuyApartment';
@@ -37,6 +39,8 @@ function App() {
         <Route path="/request-property" element={<RequestProperty />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
         <Route path="/car/:id" element={<CarDetail />} />
+        <Route path="/clothes/:id" element={<ClothesDetails />} />
+        <Route path="/land/:id" element={<LandDetails />} />
         <Route path="/buy-apartment" element={<BuyApartment />} />
         <Route path="/buy-house" element={<BuyHouse />} />
         <Route path='/buy-hotel' element={<BuyHotel />} />

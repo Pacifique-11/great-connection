@@ -1,3 +1,5 @@
+import land1 from "../assets/land.jpeg";
+import land2 from "../assets/land.jpg";
 const landData = [
     {
       id: 1,
@@ -8,7 +10,7 @@ const landData = [
       status: "available",
       owner: "John Doe",
       contact: "+250 788 123 456",
-      image: "https://via.placeholder.com/400", 
+      image: land1, 
     },
     {
       id: 2,
@@ -19,7 +21,7 @@ const landData = [
       status: "sold",
       owner: "Jane Smith",
       contact: "+250 788 654 321",
-      image: "https://via.placeholder.com/400", // Replace with actual image URL
+      image: land2,
     },
   ];
   
