@@ -66,11 +66,11 @@ const LandDetails = () => {
       </div>
 
       <div className="flex justify-between items-center text-xl font-bold">
-        <h1 className="text-3xl">{land.name || "Unknown Land"}</h1>
-        <h3 className="text-bold font-bold text-2xl">RwF {land.price || "N/A"}</h3>
+        <h1 className="lg:text-3xl text-base">{land.name || "Unknown Land"}</h1>
+        <h3 className="text-bold font-bold lg:text-2xl text-base">{land.price || "N/A"}</h3>
       </div>
 
-      <div className="mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
+      <div className="mt-4 p-6 bg-gray-50 grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto rounded-lg shadow-md">
         <p className="text-gray-700 text-lg">📍 <strong>Location:</strong> {land.location || "N/A"}</p>
         <p className="text-gray-700 text-lg">📏 <strong>Size:</strong> {land.size || "N/A"}</p>
         <p className="text-gray-700 text-lg">📜 <strong>Status:</strong> {land.status || "N/A"}</p>
@@ -81,7 +81,7 @@ const LandDetails = () => {
       <img
         src={land.image || "https://via.placeholder.com/400"}
         alt={land.name || "Land Image"}
-        className="w-full h-[400px] object-cover mt-4 rounded-md"
+        className="w-[900px] p-6 my-12 mx-auto h-96 object-cover mt-4 rounded-md"
       />
 
       <div className="my-12 p-6 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">

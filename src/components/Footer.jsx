@@ -102,17 +102,30 @@ const Footer = () => {
               Contact
             </h3>
             <p className="flex items-center mt-2 text-gray-300">
-              <IoLocationSharp className="mr-2 border-green-700" />
-              Ikaze House 1st Floor, Remera Kigali
-            </p>
-            <p className="flex items-center mt-2 text-gray-300">
-              <IoMail className="mr-2 border-green-700" />
-              business@quick.rw
-            </p>
-            <p className="flex items-center mt-2 text-gray-300">
-              <IoCall className="mr-2 border-green-700" />
-              +250 785 711 348
-            </p>
+  <IoLocationSharp className="mr-2 text-green-700" />
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Kigali-Nyarugenge,+Makuza+plaza"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:underline"
+  >
+    Kigali-Nyarugenge, Makuza plaza
+  </a>
+    </p>
+
+    <p className="flex items-center mt-2 text-gray-300">
+      <IoMail className="mr-2 text-green-700" />
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=juniorally910@gmail.com" className="hover:underline">
+        juniorally910@gmail.com
+      </a>
+    </p>
+
+    <p className="flex items-center mt-2 text-gray-300">
+      <IoCall className="mr-2 text-green-700" />
+      <a href="tel:+250785711348" className="hover:underline">
+        +250 785 711 348
+      </a>
+    </p>
           </div>
         </div>
       </div>

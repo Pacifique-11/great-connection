@@ -12,6 +12,7 @@ import ClothesDetails from './components/Buy/ClothesDetails';
 import LandDetails from './components/Buy/LandDetails';
 import SupplyProperty from './components/SupplyProperty';
 import RequestProperty from './components/RequestProperty';
+import RequestedProperties from './components/RequestedProperties';
 import BuyApartment from './components/Buy/BuyApartment';
 import BuyHouse from './components/Buy/BuyHouse';
 import BuyHotel from './components/Buy/BuyHotel';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/supply-property" element={<SupplyProperty />} />
         <Route path="/request-property" element={<RequestProperty />} />
+        <Route path="/requested-property" element={<RequestedProperties />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
         <Route path="/car/:id" element={<CarDetail />} />
         <Route path="/clothes/:id" element={<ClothesDetails />} />
