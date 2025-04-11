@@ -25,7 +25,7 @@ const Properties = [
 		"WiFi",
 	  ],
 	  "timeAgo": "7 months ago",
-	  "image": "/house.jpg",
+	  "image": "/house2.jpg",
 	},
 	{
 	  "id": "2",
@@ -44,7 +44,7 @@ const Properties = [
 	  "type": "Townhouse",
 	  "features": ["WiFi", "Swimming Pool", "Security System", "Garage", "Garden"],
 	  "timeAgo": "7 months ago",
-	  "image": "/house.jpg",
+	  "image": "/house2.jpg",
 	},
 	{
 	  "id": "3",
@@ -63,7 +63,7 @@ const Properties = [
 	  "type": "Apartment",
 	  "features": ["Balcony", "Gym", "Underground Parking", "24/7 Security"],
 	  "timeAgo": "7 months ago",
-	  "image": "/house.jpg",
+	  "image": "/house1.jpg",
 	},
 	{
 	  "id": "4",
@@ -88,7 +88,7 @@ const Properties = [
 		"CCTV Security",
 	  ],
 	  "timeAgo": "7 months ago",
-	  "image": "/house.jpg",
+	  "image": "/house1.jpg",
 	},
 	{
 	  "id": "5",
@@ -107,7 +107,7 @@ const Properties = [
 	  "type": "Townhouse",
 	  "features": ["WiFi", "Parking", "Security Fence"],
 	  "timeAgo": "7 months ago",
-	  "image":"/house.jpg",
+	  "image":"/house2.jpg",
 	},
 	{
 	  "id": "6",
@@ -126,7 +126,7 @@ const Properties = [
 	  "type": "Apartment",
 	  "features": ["WiFi", "Gym", "Swimming Pool", "Parking"],
 	  "timeAgo": "3 months ago",
-	  "image": "/house.jpg",
+	  "image": "/house2.jpg",
 	},
   ];
   
