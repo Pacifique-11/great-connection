@@ -1,7 +1,7 @@
 import Hero from "./Home/Hero";
 import ApartmentCards from "./Appatment.cards";
 import Footer from "./Footer";
-import SuppliedProperties from "./Home/GetSuppliedProperty";
+import SupplyProperty from "../components/SupplyProperty";
 import React from 'react'
 
 const Home = () => {
@@ -9,7 +9,7 @@ const Home = () => {
     <div>
         <Hero />
         <ApartmentCards />    
-		<SuppliedProperties />  
+		<SupplyProperty /> 
     </div>
   )
 }
