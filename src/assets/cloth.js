@@ -1,3 +1,4 @@
+import clothes from '../assets/clothes.jpeg';
 const clothesData = [
     {
       id: 1,
@@ -7,7 +8,7 @@ const clothesData = [
       condition: "New",
       owner: "Alice Doe",
       contact: "+250 788 123 456",
-      image: "https://via.placeholder.com/400",
+      image: clothes,
     },
     {
       id: 2,
@@ -17,7 +18,7 @@ const clothesData = [
       condition: "Used",
       owner: "Bob Smith",
       contact: "+250 788 654 321",
-      image: "https://via.placeholder.com/400", // Replace with actual image URL
+      image: clothes, 
     },
   ];
   

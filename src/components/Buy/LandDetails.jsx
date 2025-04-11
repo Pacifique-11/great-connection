@@ -78,6 +78,12 @@ const LandDetails = () => {
         <p className="text-gray-700 text-lg">📞 <strong>Contact:</strong> {land.contact || "N/A"}</p>
       </div>
 
+      <img
+        src={land.image || "https://via.placeholder.com/400"}
+        alt={land.name || "Land Image"}
+        className="w-full h-[400px] object-cover mt-4 rounded-md"
+      />
+
       <div className="my-12 p-6 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">
         <h1 className="text-xl font-bold">Contact Seller</h1>
         <form onSubmit={handleSubmit} className="mt-4">
