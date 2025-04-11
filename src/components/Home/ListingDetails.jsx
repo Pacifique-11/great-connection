@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import searchData from "../../assets/SearchData";
+import {searchData} from "../../assets/SearchData";
 
 const ListingDetails = () => {
   const { id } = useParams();

@@ -1,91 +1,98 @@
 import React, { useState } from "react";
+import { searchData } from "../../assets/SearchData";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ onSearch, locations }) => {
-  const [keyword, setKeyword] = useState("");
-  const [location, setLocation] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-
+const SearchBar = () => {
+  const [query, setQuery] = useState("");
+  const [location, setLocation] = useState(""); // State for selected location
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    if (onSearch) {
-      onSearch({ keyword, location });
-    }
-  };
-
-  const handleKeywordChange = (e) => {
+  const handleInputChange = (e) => {
     const value = e.target.value;
-    setKeyword(value);
+    setQuery(value);
 
-    // Example filtering logic (replace with real data if needed)
-    if (value.length > 1) {
-      const dummySuggestions = [
-        { id: 1, name: "Kigali Villa", location: "Kigali" },
-        { id: 2, name: "Huye House", location: "Huye" },
-        { id: 3, name: "Musanze Apartment", location: "Musanze" },
-      ];
-      const filtered = dummySuggestions.filter((item) =>
-        item.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setSuggestions(filtered);
+    filterResults(value, location); // Call the filter function with both query and location
+  };
+
+  const handleLocationChange = (e) => {
+    const value = e.target.value;
+    setLocation(value);
+
+    filterResults(query, value); // Call the filter function with both query and location
+  };
+
+  const filterResults = (query, location) => {
+    if (query.trim() !== "" || location.trim() !== "") {
+      const filtered = searchData.filter((item) => {
+        const searchField = item.title || item.name; // Use `title` or `name`
+        const matchesQuery =
+          query.trim() === "" ||
+          (searchField && searchField.toLowerCase().includes(query.toLowerCase()));
+        const matchesLocation =
+          location.trim() === "" ||
+          (item.location && item.location.toLowerCase().includes(location.toLowerCase()));
+
+        return matchesQuery && matchesLocation; // Match both query and location
+      });
+
+      setFilteredResults(filtered);
+      setShowDropdown(true);
     } else {
-      setSuggestions([]);
+      setFilteredResults([]);
+      setShowDropdown(false);
     }
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    setKeyword(suggestion.name);
-    setSuggestions([]);
-    navigate(`/details/${suggestion.id}`); // 👈 navigate to the details page
+  const handleItemClick = (path) => {
+    setShowDropdown(false);
+    navigate(path);
   };
 
   return (
-    <div className="relative w-full max-w-3xl">
-      {/* Inputs and Button */}
-      <div className="flex flex-col sm:flex-row items-center bg-white rounded-lg shadow-md p-3 sm:p-2 space-y-3 sm:space-y-0 sm:space-x-2 w-full">
+    <div style={{ position: "relative", maxWidth: "700px", margin: "auto" }}>
+      <div className="flex border text-black bg-amber-100 rounded-full overflow-hidden shadow-lg">
         <input
           type="text"
           placeholder="Enter Keyword here ..."
-          value={keyword}
-          onChange={handleKeywordChange}
-          className="flex-1 px-4 py-2 sm:py-3 rounded-md outline-none text-gray-800 w-full sm:w-auto"
+          className="px-6 py-3 flex-grow outline-none"
+          value={query}
+          onChange={handleInputChange}
         />
-
         <select
+          className="px-4 border-l outline-none"
           value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="px-4 py-2 sm:py-3 bg-white border-l text-gray-800 outline-none w-full sm:w-auto"
+          onChange={handleLocationChange}
         >
           <option value="">Select Location</option>
-          {locations.map((loc, index) => (
-            <option key={index} value={loc}>
-              {loc}
-            </option>
-          ))}
+          <option value="Kigali">Kigali</option>
+          <option value="Musanze">Musanze</option>
+          <option value="Nyarutarama">Nyarutarama</option>
+          <option value="Kibagabaga">Kibagabaga</option>
+          {/* Add more locations */}
         </select>
-
-        <button
-          onClick={handleSearch}
-          className="bg-green-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-md w-full sm:w-auto"
-        >
-          Search
-        </button>
+        <button className="bg-green-500 text-white px-6">Search</button>
       </div>
 
-      {/* Suggestions */}
-      {suggestions.length > 0 && (
-        <ul className="absolute top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg w-full z-50 max-h-60 overflow-y-auto">
-          {suggestions.map((suggestion) => (
+      {showDropdown && filteredResults.length > 0 && (
+        <ul className="absolute bg-white text-black shadow-md w-full mt-1 rounded-md max-h-60 overflow-y-auto z-10">
+          {filteredResults.map((item, index) => (
             <li
-              key={suggestion.id}
-              onClick={() => handleSuggestionClick(suggestion)}
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+              key={index}
+              className="px-6 py-3 hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleItemClick(item.path)}
             >
-              {suggestion.name} — <span className="text-gray-500">{suggestion.location}</span>
+              {item.title || item.name} - {item.location}
             </li>
           ))}
         </ul>
+      )}
+
+      {showDropdown && filteredResults.length === 0 && (
+        <div className="absolute bg-white shadow-md w-full mt-1 rounded-md p-4 text-gray-500">
+          No results found
+        </div>
       )}
     </div>
   );
