@@ -1,12 +1,12 @@
 import React from "react";
-import background from "../../assets/background.jpg";
+
 
 const HeroSection = () => {
   return (
     <div className="relative h-auto py-6 w-full mt-20">
       {/* Background Image */}
       <img
-        src={background}
+        src="./cover1.jpg"
         alt="Background"
         className="absolute inset-0 w-full h-full object-cover"
       />
