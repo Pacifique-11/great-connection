@@ -181,5 +181,5 @@ const RequestProperty = () => {
   );
 };
 
-export default RequestProperty;
+export default RequestProperty
 
