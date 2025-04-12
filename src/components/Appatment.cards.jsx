@@ -38,7 +38,7 @@ const ApartmentCards = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center py-6">
+    <div className="flex flex-wrap gap-6 justify-center py-6 ">
       {properties.map((property) => (
         <div key={property._id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-4 bg-white">
           {/* Property Image and Status */}
@@ -48,18 +48,10 @@ const ApartmentCards = () => {
               src={property.image || 'https://via.placeholder.com/150'}
               alt={property.title}
             />
-            <span className="absolute inset-0 flex justify-center items-center">
-              <span className="bg-black bg-opacity-20 rounded-full p-1">
-                <FaEye className="w-3 h-3 text-white cursor-pointer" />
-              </span>
-            </span>
             <span className="absolute top-2 right-2 bg-black text-white px-2 py-1 text-xs rounded">
               {property.status}
             </span>
-            <span className="absolute bottom-2 right-2 flex items-center text-gray-500 px-2 py-1 text-xs rounded gap-2">
-              <FaHeart className="w-5 h-5 cursor-pointer" />
-              <FaShare className="w-5 h-5 cursor-pointer" />
-            </span>
+           
           </div>
 
           {/* Property Details */}

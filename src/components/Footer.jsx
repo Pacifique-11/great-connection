@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
 import { BsWhatsapp } from "react-icons/bs";
 import  axios from 'axios';
@@ -123,9 +124,31 @@ const Footer = () => {
       
       <div className="mt-8 flex justify-between items-center">
         <div className="flex space-x-4">
-          <FaFacebookF className="text-xl border-green-700 cursor-pointer" />
-          <FaInstagram className="text-xl border-green-700 cursor-pointer" />
-          <FaYoutube className="text-xl border-green-700 cursor-pointer" />
+		<a
+        href="https://web.facebook.com/dusabimana.paccy.5"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xl border-green-700 cursor-pointer"
+      >
+        <FaFacebook />
+      </a>
+	  <a
+        href="https://www.youtube.com/@pacifiquedusabimana135"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-red-600 hover:text-red-800 transition"
+      >
+        <FaYoutube />
+      </a>
+
+	  <a
+        href="https://www.instagram.com/pacifique_dusabimana/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-pink-500 hover:text-pink-700 transition"
+      >
+        <FaInstagram />
+      </a>
         </div>
     
 	   <a href="https://wa.me/+250785934003" target='_blank' >

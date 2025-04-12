@@ -3,12 +3,12 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <div className="relative h-auto py-6 w-full mt-20">
+    <div className="relative h-auto py-6 w-full mt-30">
       {/* Background Image */}
       <img
-        src="./cover1.jpg"
+        src="./homeImage.jpg"
         alt="Background"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full  object-cover "
       />
 
       {/* Overlay & Content */}
