@@ -12,9 +12,10 @@ import CarDetail from './components/Buy/carDetails';
 import CreateSupplyProperty from './components/CreateSupplyProperty';
 import ClothesDetails from './components/Buy/ClothesDetails';
 import LandDetails from './components/Buy/LandDetails';
-
-
+import ListingDetails from './components/Home/ListingDetails';
+import SupplyProperty from './components/SupplyProperty';
 import RequestProperty from './components/RequestProperty';
+import RequestedProperties from './components/RequestedProperties';
 import BuyApartment from './components/Buy/BuyApartment';
 import BuyHouse from './components/Buy/BuyHouse';
 import BuyHotel from './components/Buy/BuyHotel';
@@ -41,10 +42,12 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/supply-property" element={<CreateSupplyProperty />} />
         <Route path="/request-property" element={<RequestProperty />} />
+        <Route path="/requested-property" element={<RequestedProperties />} />
         <Route path="/property/:id" element={<PropertyDetail />} />
         <Route path="/car/:id" element={<CarDetail />} />
         <Route path="/clothes/:id" element={<ClothesDetails />} />
         <Route path="/land/:id" element={<LandDetails />} />
+        <Route path="/details/:id" element={<ListingDetails />} /> 
         <Route path="/buy-apartment" element={<BuyApartment />} />
         <Route path="/buy-house" element={<BuyHouse />} />
         <Route path='/buy-hotel' element={<BuyHotel />} />

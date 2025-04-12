@@ -65,22 +65,24 @@ const ClothesDetails = () => {
       </div>
 
       <div className="flex justify-between items-center text-xl font-bold">
-        <h1 className="text-3xl">{clothes.name || "Unknown Clothes"}</h1>
-        <h3 className="text-bold font-bold text-2xl">RwF {clothes.price || "N/A"}</h3>
+        <h1 className="lg:text-3xl text-base">{clothes.name || "Unknown Clothes"}</h1>
+        <h3 className="text-bold font-bold text-base lg:text-2xl">{clothes.price || "N/A"}</h3>
       </div>
 
-      <img
-        src={clothes.image || "https://via.placeholder.com/400"}
-        alt={clothes.name || "Clothes Image"}
-        className="w-full h-[400px] object-cover mt-4 rounded-md"
-      />
+      
 
-      <div className="mt-4 p-6 bg-gray-50 rounded-lg shadow-md">
+      <div className="mt-4 p-6 w-[900px] grid grid-cols-1 lg:grid-cols-3 mx-auto bg-gray-50 rounded-lg shadow-md">
         <p className="text-gray-700 text-lg">📏 <strong>Size:</strong> {clothes.size || "N/A"}</p>
         <p className="text-gray-700 text-lg">✨ <strong>Condition:</strong> {clothes.condition || "N/A"}</p>
         <p className="text-gray-700 text-lg">👤 <strong>Owner:</strong> {clothes.owner || "N/A"}</p>
         <p className="text-gray-700 text-lg">📞 <strong>Contact:</strong> {clothes.contact || "N/A"}</p>
       </div>
+
+      <img
+        src={clothes.image || "https://via.placeholder.com/400"}
+        alt={clothes.name || "Clothes Image"}
+        className="w-[900px] p-6 h-[400px] object-cover mt-4  mx-auto rounded-md"
+      />
 
       <div className="my-12 p-6 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">
         <h1 className="text-xl font-bold">Contact Seller</h1>

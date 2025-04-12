@@ -43,6 +43,7 @@ export const NavBar = () => {
 				<div className="space-x-4">
 					<Link to="/login" className="hover:underline">Login</Link>
 					<Link to="/register" className="hover:underline">Register</Link>
+					<Link to="/requested-property" className="hover:underline">Requests</Link>
 				</div>
 			</div>
 
@@ -102,6 +103,9 @@ export const NavBar = () => {
 			{isOpen && (
 				<div className="md:hidden bg-white shadow-md absolute w-full left-0 top-16 z-50" onClick={(e) => e.stopPropagation()}>
 					<nav className="flex flex-col text-black font-medium">
+					<Link to="/login" className=" hover:text-green-800 p-3 border-b" onClick={() => setIsOpen(false)}>Login</Link>
+					<Link to="/register" className=" hover:text-green-800 p-3 border-b" onClick={() => setIsOpen(false)}>Register</Link>
+					<Link to="/requested-property" className=" hover:text-green-800 p-3 border-b" onClick={() => setIsOpen(false)}>Requests</Link>
 						<Link to="/" className="p-3 border-b hover:text-green-800" onClick={() => setIsOpen(false)}>
 							Home
 						</Link>
