@@ -1,65 +1,56 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import SupplyCard from './SupplyCard';
+import axios from 'axios';
 
 const SupplyProperty = () => {
-  const [formData, setFormData] = useState({
-    id: "",
-    title: "",
-    price: "",
-    status: "",
-    location: "",
-    owner: "",
-    contact: "",
-    description: "",
-    bedrooms: "",
-    bathrooms: "",
-    toilets: "",
-    area: "",
-    type: "",
-    features: "",
-    timeAgo: "",
-    image: null,
-  });
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const response = await axios.get('https://easy-renting-bn.onrender.com/api/supply-property');
+		console.assert(response.data, 'API Response:', response.data); // Log the API response for debugging
+		setProperties(response.data.data); // Assuming the API returns an array of properties
+      } catch (err) {
+        setError('Failed to fetch properties. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, []);
+
+  const handleViewDetails = (id) => {
+    navigate(`/supply-property-detail/${id}`); // Navigate to the SupplyDetail component with the ID
   };
 
-  const handleImageUpload = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
-  };
+  if (loading) {
+    return <div className="text-center py-10">Loading properties...</div>;
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-  };
+  if (error) {
+    return <div className="text-center py-10 text-red-500">{error}</div>;
+  }
 
   return (
-    <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">SUPPLY PROPERTY</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <input type="text" name="title" placeholder="Property Title" className="border p-2 rounded w-full" onChange={handleChange} />
-          <input type="text" name="owner" placeholder="Owner Name" className="border p-2 rounded w-full" onChange={handleChange} />
-          <input type="text" name="location" placeholder="Location" className="border p-2 rounded w-full" onChange={handleChange} />
-          <input type="tel" name="contact" className="w-full border p-2 rounded" placeholder="Contact Number" onChange={handleChange} />
-          <select name="status" className="border p-2 rounded w-full" onChange={handleChange}>
-            <option value="">-- Select Status --</option>
-            <option value="For Rent">For Rent</option>
-            <option value="For Sale">For Sale</option>
-          </select>
-          <input type="number" name="price" className="border p-2 rounded w-full" placeholder="Price" onChange={handleChange} />
-          <input type="number" name="bedrooms" className="border p-2 rounded w-full" placeholder="Bedrooms" onChange={handleChange} />
-          <input type="number" name="bathrooms" className="border p-2 rounded w-full" placeholder="Bathrooms" onChange={handleChange} />
-          <input type="number" name="toilets" className="border p-2 rounded w-full" placeholder="Toilets" onChange={handleChange} />
-          <input type="text" name="area" className="border p-2 rounded w-full" placeholder="Area (sqm)" onChange={handleChange} />
-          <input type="text" name="type" className="border p-2 rounded w-full" placeholder="Property Type" onChange={handleChange} />
-          <input type="text" name="features" className="border p-2 rounded w-full" placeholder="Features (comma separated)" onChange={handleChange} />
-        </div>
-        <textarea name="description" placeholder="Property Description" className="border p-2 rounded w-full" onChange={handleChange}></textarea>
-        <input type="file" onChange={handleImageUpload} className="border p-2 rounded w-full cursor-pointer"  />
-        <button type="submit" className="bg-green-500 text-white p-2 rounded w-full hover:bg-blue-600">Submit</button>
-      </form>
+    <div className="container mx-auto py-10 px-6">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Supplied  Properties</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {properties.map((property) => (
+          <SupplyCard
+            key={property._id}
+            image={property.image} // Assuming the API provides an `image` field
+            title={property.title} // Assuming the API provides a `title` field
+            description={property.description} // Assuming the API provides a `description` field
+            onClick={() => handleViewDetails(property._id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

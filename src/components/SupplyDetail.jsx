@@ -3,11 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import { FaHome, FaLocationArrow } from "react-icons/fa";
 import axios from "axios";
 
-const PropertyDetail = () => {
+const SupplyDetail = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,29 +18,18 @@ const PropertyDetail = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/get-property/${id}`);
-        setProperty(response.data.property); // Assuming the API returns the property details
-      } catch (err) {
-        setError('Failed to fetch property details. Please try again later.');
-      } finally {
-        setLoading(false);
+        const res = await axios.get(
+          `https://easy-renting-bn.onrender.com/api/supply-property/${id}`
+        );
+        console.log("Property Data", res.data);
+        setProperty(res.data.data);
+      } catch (error) {
+        console.error("Error fetching property:", error);
       }
     };
 
     fetchProperty();
   }, [id]);
-
-  if (loading) {
-    return <div className="text-center py-10">Loading property details...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center py-10 text-red-500">{error}</div>;
-  }
-
-  if (!property) {
-    return <h2 className="text-red-500 text-center mt-10">Property not found</h2>;
-  }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,6 +44,10 @@ const PropertyDetail = () => {
     console.log("Form Submitted:", formData);
   };
 
+  if (!property) {
+    return <div className="text-center py-20 text-lg">Loading property details...</div>;
+  }
+
   return (
     <div className="container mx-auto p-6 mt-20">
       {/* Breadcrumb Navigation */}
@@ -65,21 +56,23 @@ const PropertyDetail = () => {
       </div>
 
       {/* Property Header */}
-      <div className="flex justify-between items-center ">
-        <h1 className="text-md font-semibold">{property.title}</h1>
-        <h3 className="text-bold font-bold text-xl">RwF {property.price}</h3>
+      <div className="flex justify-between items-center text-xl font-bold">
+        <h1 className="text-3xl">{property.title}</h1>
+        <h3 className="text-bold font-bold text-2xl">RwF {property.price}</h3>
       </div>
+
       <div className="m-4">
-        <button className="bg-green-500 text-white py-2 px-4 text-sm rounded-lg">{property.status}</button>
+        <button className="bg-green-500 text-white py-2 px-4 text-sm rounded-lg">FOR RENT</button>
         <div className="p-4 flex items-center gap-2 text-gray-600">
           <FaLocationArrow />
           <span>{property.location}</span>
         </div>
       </div>
-      <img 
-        src={property.image} 
-        alt={property.title} 
-        className="w-full h-[600px] hover:opacity-60 transition-300 cursor-pointer object-cover mt-4 rounded-md transition-opacity duration-300" 
+
+      <img
+        src={property.image}
+        alt={property.title}
+        className="w-full h-[600px] hover:opacity-60 transition-300 cursor-pointer object-cover mt-4 rounded-md transition-opacity duration-300"
       />
 
       {/* Property Details */}
@@ -101,27 +94,42 @@ const PropertyDetail = () => {
         <p><strong>Area:</strong> {property.area}</p>
       </div>
 
-      {/* Features */}
-	  <div className="mt-8">
-  <h3 className="text-2xl text-sembold">Features</h3>
-  <hr className="my-4 w-1/2 text-gray-300" />
-  <div className="space-y-4 mt-4 flex flex-wrap gap-4">
-    {property.features && property.features.length > 0 ? (
-      property.features.map((feature, index) => (
-        <div key={index} className="p-4">
-          <ul className="list-circle ml-4 text-gray-700">
-            <li>{feature}</li>
-          </ul>
+      {/* Address */}
+      <div className="mt-8">
+        <h3 className="text-2xl font-semibold">Address</h3>
+        <hr className="my-4 w-1/2 text-gray-300" />
+        <div className="flex items-center gap-2 text-gray-600">
+          <h3 className="text-xl">Address</h3>
+          <span className="ml-6">{property.location}</span>
         </div>
-      ))
-    ) : (
-      <p className="text-gray-600">No features available for this property.</p>
-    )}
-  </div>
-</div>
+      </div>
+
+      {/* Features */}
+      <div className="mt-8">
+        <h3 className="text-2xl font-semibold">Features</h3>
+        <hr className="my-4 w-1/2 text-gray-300" />
+        <div className="space-y-4 mt-4 flex flex-wrap gap-4">
+          {property.features && property.features.length > 0 ? (
+            Array.from({ length: Math.ceil(property.features.length / 3) }, (_, index) => {
+              const chunk = property.features.slice(index * 3, index * 3 + 3);
+              return (
+                <div key={index} className="p-4">
+                  <ul className="list-disc ml-4 text-gray-700">
+                    {chunk.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-gray-500">No features listed for this property.</p>
+          )}
+        </div>
+      </div>
 
       {/* Contact Form */}
-      <div className="my-12 p-4 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">
+      <div className="my-12 p-6 bg-gray-100 rounded-lg shadow-lg lg:w-[900px] w-full mx-auto">
         <h1 className="text-xl font-bold">Contact Information</h1>
         <form onSubmit={handleSubmit} className="mt-4">
           <div className="grid grid-cols-2 gap-4">
@@ -164,4 +172,4 @@ const PropertyDetail = () => {
   );
 };
 
-export default PropertyDetail;
+export default SupplyDetail;

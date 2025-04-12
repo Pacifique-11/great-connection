@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
 import { BsWhatsapp } from "react-icons/bs";
 import  axios from 'axios';
@@ -16,10 +17,12 @@ const Footer = () => {
 	
 			if (res.status === 201) {
 				setMessage(res.data.message);
-				setEmail('');
+				setEmail(''); // Clear the email field immediately after success
 
 			}
-			setLoading(false);
+			setTimeout(() => {
+				setMessage(''); 
+			  }, 5000); 
 		} catch (error) {
 			 if (error.response) {
      
@@ -28,10 +31,11 @@ const Footer = () => {
       setMessage('Subscription failed. Please try again later.');
     }
     setTimeout(() => {
-      setMessage('');
+      setMessage(''); // Clear the message after 5 seconds
+      setEmail(''); // Clear the email field after 5 seconds
     }, 5000); 
   } finally {
-    setLoading(false); 
+    setLoading(false); // Stop the loading state
   }
 		  
 	}
@@ -88,7 +92,7 @@ const Footer = () => {
           className="mt-2 w-full bg-green-400 border-green-700 text-white py-2 rounded-md hover:bg-green-800 transition cursor-pointer"
           
         >
-         {loading ? 'Please wait!......' : 'Subscribe'}
+         {loading ? 'Please wait......!' : 'Subscribe'}
         </button>
 			</form>
 
@@ -133,12 +137,34 @@ const Footer = () => {
       
       <div className="mt-8 flex justify-between items-center">
         <div className="flex space-x-4">
-          <FaFacebookF className="text-xl border-green-700 cursor-pointer" />
-          <FaInstagram className="text-xl border-green-700 cursor-pointer" />
-          <FaYoutube className="text-xl border-green-700 cursor-pointer" />
+		<a
+        href="https://web.facebook.com/dusabimana.paccy.5"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-xl border-green-700 cursor-pointer"
+      >
+        <FaFacebook />
+      </a>
+	  <a
+        href="https://www.youtube.com/@pacifiquedusabimana135"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-red-600 hover:text-red-800 transition"
+      >
+        <FaYoutube />
+      </a>
+
+	  <a
+        href="https://www.instagram.com/pacifique_dusabimana/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-pink-500 hover:text-pink-700 transition"
+      >
+        <FaInstagram />
+      </a>
         </div>
     
-	   <a href="https://wa.me/+250783908965" target='_blank' >
+	   <a href="https://wa.me/+250785934003" target='_blank' >
         <div className="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-full cursor-pointer shadow-lg">
           <BsWhatsapp className="text-2xl" />
         </div>
