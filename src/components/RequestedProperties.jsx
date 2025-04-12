@@ -68,4 +68,4 @@ const RequestedProperties = () => {
   );
 };
 
-export default RequestedProperties;
+export default RequestedProperties
