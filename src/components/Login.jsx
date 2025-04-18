@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
@@ -8,7 +8,9 @@ const Login = () => {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null); 
 
+   const navigate = useNavigate(); 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -33,8 +35,10 @@ const Login = () => {
         }
       );
       localStorage.setItem('token', response.data.token); 
-	  alert(`Login Successful: ${response.data.message}`);
-	  console.log('Login Response:', response.data);
+	  setSuccessMessage('Login successful! Redirecting...'); 
+	  setTimeout(() => {
+		navigate('/home'); 
+	  }, 2000); 
 	  
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred while logging in.');
@@ -45,6 +49,17 @@ const Login = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
+  useEffect(() => {
+    if (error || successMessage) {
+      const timer = setTimeout(() => {
+        setError(null);
+        setSuccessMessage(null);
+      }, 4000); 
+
+      
+      return () => clearTimeout(timer);
+    }
+  }, [error, successMessage]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 mt-10">
@@ -95,8 +110,19 @@ const Login = () => {
             type="submit"
             className="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
           >
-            Login
+			{loading ? 'Logging in wait...' : 'Login'}
           </button>
+		  
+		   {error && (
+            <div className="mt-4 text-red-500">
+              {error}
+            </div>
+          )}
+          {successMessage && (
+            <div className="mt-4 text-green-500">
+              {successMessage}
+            </div>
+          )}
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const [showPassword, setShowPassword] = useState({
     password: false,
@@ -14,12 +14,13 @@ const Register = () => {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [successMessage, setSuccessMessage] = useState(null);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value, // Dynamically update the formData
+      [name]: value, 
     });
   };
 
@@ -33,7 +34,10 @@ const Register = () => {
           'Content-Type': 'application/json',
         },
       });
-      alert('User Registered:', response.data);
+      localStorage.setItem('token', response.data.token); 
+	  setTimeout(() => {
+		navigate('/login'); 
+	  }, 2000); 
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred while registering.');
       console.error('Error during registration:', err);
@@ -41,6 +45,17 @@ const Register = () => {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (error || successMessage) {
+      const timer = setTimeout(() => {
+        setError(null);
+        setSuccessMessage(null);
+      }, 4000); 
+
+
+      return () => clearTimeout(timer);
+    }
+  }, [error, successMessage]);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 mt-10">
@@ -54,8 +69,8 @@ const Register = () => {
               type="text"
               id="username"
               name="username"
-              value={formData.username} // Bind formData
-              onChange={handleChange} // Update state on change
+              value={formData.username}
+              onChange={handleChange} 
               placeholder="Enter your Full Name"
               className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
             />
@@ -69,8 +84,8 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
-              value={formData.email} // Bind formData
-              onChange={handleChange} // Update state on change
+              value={formData.email} 
+              onChange={handleChange}
               placeholder="Enter your Email"
               className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
             />
@@ -85,8 +100,8 @@ const Register = () => {
                 type={showPassword.password ? 'text' : 'password'}
                 id="password"
                 name="password"
-                value={formData.password} // Bind formData
-                onChange={handleChange} // Update state on change
+                value={formData.password}
+                onChange={handleChange} 
                 placeholder="Write your Password"
                 className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
               />
@@ -109,8 +124,8 @@ const Register = () => {
                 type={showPassword.confirmPassword ? 'text' : 'password'}
                 id="confirmPassword"
                 name="confirmPassword"
-                value={formData.confirmPassword} // Bind formData
-                onChange={handleChange} // Update state on change
+                value={formData.confirmPassword}
+                onChange={handleChange} 
                 placeholder="Confirm your Password"
                 className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
               />
@@ -128,8 +143,18 @@ const Register = () => {
             type="submit"
             className="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Register
+            {loading ? 'Registering ...' : 'Register'}
           </button>
+		  {error && (
+            <div className="mt-4 text-red-500">
+              {error}
+            </div>
+          )}
+          {successMessage && (
+            <div className="mt-4 text-green-500">
+              {successMessage}
+            </div>
+          )}
         </form>
       </div>
     </div>
