@@ -7,14 +7,14 @@ const SupplyProperty = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         const response = await axios.get('https://easy-renting-bn.onrender.com/api/supply-property');
-		console.assert(response.data, 'API Response:', response.data); // Log the API response for debugging
-		setProperties(response.data.data); // Assuming the API returns an array of properties
+		console.assert(response.data, 'API Response:', response.data); 
+		setProperties(response.data.data); 
       } catch (err) {
         setError('Failed to fetch properties. Please try again later.');
       } finally {
@@ -38,7 +38,7 @@ const SupplyProperty = () => {
   }
 
   return (
-    <div className="container mx-auto py-10 px-6">
+    <div className="container mx-auto mt-40 px-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Supplied  Properties</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {properties.map((property) => (
