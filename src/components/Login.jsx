@@ -35,11 +35,20 @@ const Login = () => {
         }
       );
       localStorage.setItem('token', response.data.token); 
-	  setSuccessMessage('Login successful! Redirecting...'); 
-	  setTimeout(() => {
-		navigate('/home'); 
-	  }, 2000); 
 	  
+	  setSuccessMessage('Login successful! Redirecting...'); 
+	  const userRole = response.data.user?.role;
+      setTimeout(() => {
+        if (userRole === 'seller') {
+          navigate('/supply');
+        } else if (userRole === 'buyer') {
+          navigate('/request');
+        } else if (userRole === 'admin') {
+          navigate('/dashboard');
+        } else {
+          navigate('/'); 
+        }
+      }, 2000);
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred while logging in.');
       console.error('Error during login:', err);

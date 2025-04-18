@@ -36,6 +36,7 @@ function App() {
      <Router>
       <NavBar />
       <Routes>
+		<Route path="/supply" element={<SupplyProperty />} />
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

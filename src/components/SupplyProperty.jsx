@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import SupplyCard from './SupplyCard';
 import axios from 'axios';
 
@@ -26,7 +26,7 @@ const SupplyProperty = () => {
   }, []);
 
   const handleViewDetails = (id) => {
-    navigate(`/supply-property-detail/${id}`); // Navigate to the SupplyDetail component with the ID
+    navigate(`/supply-property-detail/${id}`); 
   };
 
   if (loading) {
@@ -44,9 +44,9 @@ const SupplyProperty = () => {
         {properties.map((property) => (
           <SupplyCard
             key={property._id}
-            image={property.image} // Assuming the API provides an `image` field
-            title={property.title} // Assuming the API provides a `title` field
-            description={property.description} // Assuming the API provides a `description` field
+            image={property.image} 
+            title={property.title}
+            description={property.description} 
             onClick={() => handleViewDetails(property._id)}
           />
         ))}
