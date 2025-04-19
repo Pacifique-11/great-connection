@@ -8,7 +8,6 @@ import Register from './components/Register';
 import Home from './components/Home'
 import PropertyDetail from './pages/PropertyDetail';
 import CarDetail from './components/Buy/carDetails';
-
 import CreateSupplyProperty from './components/CreateSupplyProperty';
 import ClothesDetails from './components/Buy/ClothesDetails';
 import LandDetails from './components/Buy/LandDetails';
@@ -29,6 +28,10 @@ import RentCar from './components/Rent/RentCar';
 import RentMotorcycle from './components/Rent/RentMotorcycle';
 import RentOtherProperties from './components/Rent/RentOtherProperties';
 import SupplyPropertyDetail from './components/SupplyDetail';
+import AssetProperty from './components/AssetProperty';
+import PropertyTypeCards from './pages/PropertyTypeCards'
+
+
 import './App.css'
 
 function App() {
@@ -62,6 +65,9 @@ function App() {
         <Route path="/rent-motorcycle" element={<RentMotorcycle />} />
         <Route path="/rent-other-properties" element={<RentOtherProperties />} />
 		<Route path="/supply-property-detail/:id" element={<SupplyPropertyDetail />} />
+		<Route path="/asset-property/:type" element={<AssetProperty />} />
+		<Route path="/property/:type" element={<PropertyTypeCards />} />
+		
         {/* 404 Page Not Found */}
         <Route path="*" element={
           <div className='flex flex-col items-center shadow-md p-6 mt-25'>

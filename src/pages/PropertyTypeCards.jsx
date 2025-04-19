@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { FaBed, FaBath, FaHeart, FaShare, FaEye } from 'react-icons/fa';
+import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCropSquare } from 'react-icons/md';
-import { useNavigate ,useParams} from 'react-router-dom'; // Import useNavigate
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const ApartmentCards = () => {
+const PropertyTypeCards = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
-  const {id} = useParams(); 
+  const { type } = useParams();
+  const navigate = useNavigate();
+
+  const displayType = type.charAt(0).toUpperCase() + type.slice(1); 
+
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('https://easy-renting-bn.onrender.com/api/get-properties');
-        setProperties(response.data); 
+        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/get-properties/type/${displayType}`);
+        setProperties(response.data);
       } catch (err) {
         setError('Failed to fetch properties. Please try again later.');
       } finally {
@@ -23,14 +26,14 @@ const ApartmentCards = () => {
     };
 
     fetchProperties();
-  }, []);
+  }, [displayType]);
 
   const handleViewDetails = (id) => {
-    navigate(`/property/${id}`); // Navigate to the PropertyDetail page with the property ID
+    navigate(`/property/${id}`);
   };
 
   if (loading) {
-    return <div className="text-center py-10">Loading properties...</div>;
+    return <div className="text-center py-10">Loading {displayType} properties...</div>;
   }
 
   if (error) {
@@ -38,10 +41,10 @@ const ApartmentCards = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center py-6 ">
+    <div className="flex flex-wrap gap-6 justify-center py-6">
       {properties.map((property) => (
         <div key={property._id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-4 bg-white">
-          {/* Property Image and Status */}
+          {/* Image and Status */}
           <div className="relative">
             <img
               className="w-full h-48 object-cover rounded-md"
@@ -51,10 +54,9 @@ const ApartmentCards = () => {
             <span className="absolute top-2 right-2 bg-black text-white px-2 py-1 text-xs rounded">
               {property.status}
             </span>
-           
           </div>
 
-          {/* Property Details */}
+          {/* Property Info */}
           <div className="p-4">
             <h3 className="text-lg font-bold text-gray-800 mt-1">RWF {property.price}</h3>
             <p className="text-gray-600 text-sm mt-1">{property.description.substring(0, 80)}...</p>
@@ -71,16 +73,15 @@ const ApartmentCards = () => {
               </div>
             </div>
 
-            {/* Navigate to Property Detail Page */}
             <button
-              onClick={() => handleViewDetails(property._id)} // Use the handler function
+              onClick={() => handleViewDetails(property._id)}
               className="mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 cursor-pointer"
             >
               View Details
             </button>
           </div>
 
-          {/* Footer Information */}
+          {/* Footer */}
           <div className="p-4 text-gray-500 text-sm flex justify-between border-t">
             <span>{property.owner}</span>
             <span>{property.timeAgo}</span>
@@ -91,4 +92,4 @@ const ApartmentCards = () => {
   );
 };
 
-export default ApartmentCards;
+export default PropertyTypeCards;
