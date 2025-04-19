@@ -17,7 +17,7 @@ const PropertyTypeCards = () => {
     const fetchProperties = async () => {
       try {
         const response = await axios.get(`https://easy-renting-bn.onrender.com/api/get-properties/type/${displayType}`);
-        setProperties(response.data);
+        setProperties(response.data.properties);
       } catch (err) {
         setError('Failed to fetch properties. Please try again later.');
       } finally {
@@ -41,7 +41,7 @@ const PropertyTypeCards = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center py-6">
+    <div className="flex flex-wrap gap-6 justify-center py-6 mt-10 mb-6 bg-gray-100">
       {properties.map((property) => (
         <div key={property._id} className="max-w-sm rounded-2xl overflow-hidden shadow-lg p-4 bg-white">
           {/* Image and Status */}

@@ -66,7 +66,7 @@ function App() {
         <Route path="/rent-other-properties" element={<RentOtherProperties />} />
 		<Route path="/supply-property-detail/:id" element={<SupplyPropertyDetail />} />
 		<Route path="/asset-property/:type" element={<AssetProperty />} />
-		<Route path="/property/:type" element={<PropertyTypeCards />} />
+		<Route path="/get-properties/type/:type" element={<PropertyTypeCards />} />
 		
         {/* 404 Page Not Found */}
         <Route path="*" element={

@@ -62,9 +62,9 @@ export const NavBar = () => {
 						</button>
 						{dropdown === "rent" && (
 							<div className="absolute bg-white shadow-md mt-2 w-48">
-								<Link to="/property/House" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> House</Link>
-								<Link to="/property/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Hotel</Link>
-								<Link to="/property/Apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Apartment</Link>
+								<Link to="/get-properties/type/House" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> House</Link>
+								<Link to="/get-properties/type/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Hotel</Link>
+								<Link to="/get-properties/type/Apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Apartment</Link>
 								<Link to="/asset-property/Land" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Land</Link>
 								<Link to="/asset-property/Clothes" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Clothes</Link>
 								<Link to="/asset-property/Car" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Car</Link>
@@ -95,10 +95,10 @@ export const NavBar = () => {
 							</button>
 							{dropdown === "rent" && (
 								<div className="pl-5">
-									<Link to="/property/House" className="block py-2 hover:text-green-800" onClick={() => setIsOpen(false)}>	House</Link>
-									<Link to="/property/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Hotel</Link>
-									<Link to="/property/Apartment" className="block py-2 hover:text-green-800" onClick={() => setIsOpen(false)}>Apartment</Link>
-								    <Link to="/asset-property/aLnd" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Land</Link>
+									<Link to="/get-properties/type/House" className="block px-4 py-2 hover:text-green-800" onClick={() => setIsOpen(false)}>	House</Link>
+									<Link to="/get-properties/type/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Hotel</Link>
+									<Link to="/get-properties/type/Apartment" className="block px-4 py-2 hover:text-green-800" onClick={() => setIsOpen(false)}>Apartment</Link>
+								    <Link to="/asset-property/Land" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Land</Link>
 								    <Link to="/asset-property/Clothes" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Clothes</Link>
 									<Link to="/asset-property/Car" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}>Car</Link>
 									<Link to="/asset-property/Motorcycle" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}>Motorcycle</Link>
@@ -110,7 +110,7 @@ export const NavBar = () => {
 						<Link to="/supply-property" className="p-3 border-b hover:text-green-800" onClick={() => setIsOpen(false)}>
 							Supply Property
 						</Link>
-						<Link to="/request-property" className="hover:text-green-800" onClick={() => setIsOpen(false)}>Request Property</Link>
+						<Link to="/request-property" className="p-3  hover:text-green-800" onClick={() => setIsOpen(false)}>Request Property</Link>
 						<Link to="/contact" className="p-3 hover:text-green-800" onClick={() => setIsOpen(false)}>
 							Contact
 						</Link>

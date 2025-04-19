@@ -22,7 +22,7 @@ const AssetProperty = () => {
   }, [displayType]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 mt-10 mb-6 bg-gray-100">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
         {displayType} Listings
       </h2>
