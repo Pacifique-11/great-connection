@@ -1,16 +1,35 @@
-import React from 'react'
-import { FaSearch } from "react-icons/fa"
+import React, { useState, useEffect } from 'react';
+import AssetPropertyList from './AssetPropertyList';
+import PropertyList from './PropertyList';
 
+function SearchBar() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState({ assets: [], properties: [] });
 
-const SearchBar = () => {
+  useEffect(() => {
+    const fetchResults = async () => {
+      const res = await fetch(`https://easy-renting-bn.onrender.com/api/search?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      setResults(data);
+    };
+
+    fetchResults();
+  }, [query]);
+
   return (
-	<div>
-	  <div className='flex  bg-gray-200 rounded-lg p-2 items-center max-w-2xl'>
-		<FaSearch size={20}/>
-		<input type="text" placeholder='Search...' className='border-none outline-none py-2 px-4 text-xl'/>
-	  </div>
-	</div>
-  )
+    <div className="p-6 space-y-4">
+      <input
+        type="text"
+        placeholder="Search properties or assets..."
+        className="border p-2 rounded w-full"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
+      <AssetPropertyList assets={results.assets} />
+      <PropertyList properties={results.properties} />
+    </div>
+  );
 }
 
-export default SearchBar
+export default SearchBar;

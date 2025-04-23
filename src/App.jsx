@@ -30,7 +30,9 @@ import RentOtherProperties from './components/Rent/RentOtherProperties';
 import SupplyPropertyDetail from './components/SupplyDetail';
 import AssetProperty from './components/AssetProperty';
 import PropertyTypeCards from './pages/PropertyTypeCards'
-
+import Homepage  from './pages/Homepage';
+import PropertyList from './components/property/PropertyList';
+import AssetPropertyList from './components/property/AssetPropertyList';
 
 import './App.css'
 
@@ -41,6 +43,7 @@ function App() {
       <Routes>
 		<Route path="/supply" element={<SupplyProperty />} />
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Homepage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
