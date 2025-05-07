@@ -1,12 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&display=swap');
+
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300;
+}
+.btn {
+	@apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition;
+  }
+
 
 html,body{
-	font-family: serif, sans-serif;
+	font-family: 'Poppins', sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	scroll-behavior: smooth;
 }
+
 .custom-select {
 	background-color: #16a34a; /* Green */
 	color: white;

@@ -1,18 +1,40 @@
+import React, { useState } from 'react';
 import Hero from "./Home/Hero";
 import ApartmentCards from "./Appatment.cards";
 import Footer from "./Footer";
-import SupplyProperty from "../components/SupplyProperty";
-import React from 'react'
-import { useParams } from "react-router-dom";
 import AssetProperty from "./AssetProperty";
-const Home = () => {
-  return (
-    <div>
-        <Hero />
-        <ApartmentCards />    
-		   <AssetProperty />
-    </div>
-  )
-}
+import SearchBar from "./Home/SearchBar";
+import {NavBar} from "./NavBar";
 
-export default Home
+const Home = () => {
+  const [filteredAssets, setFilteredAssets] = useState([]);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleSearchResults = (results) => {
+    setFilteredAssets(results.assets);
+    setFilteredProperties(results.properties);
+    setIsSearching(true);
+  };
+  return (
+    <div className="bg-gray-50 mt-20">
+      <NavBar />
+      <Hero />
+      <SearchBar onSearchResults={handleSearchResults} />
+      {isSearching ? (
+        <div className="p-6 space-y-6">
+          <ApartmentCards properties={filteredProperties} />
+          <AssetProperty assets={filteredAssets} />
+        </div>
+      ) : (
+        <>
+          <ApartmentCards />
+          <AssetProperty />
+        </>
+      )}
+      <Footer />
+      </div>
+  );
+};
+
+export default Home;

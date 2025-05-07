@@ -1,12 +1,14 @@
-import React from "react";
-import {  useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import { NavBar } from "../components/NavBar";
 
-const AssetProperty = ({ assets = []}) => {
-   
-  if (assets.length === 0) {
-    return <div className="text-center py-4 text-gray-500">No Asset Found.</div>;
-  }
+const GetAssetPropertyByType = () => {
+  const { type } = useParams();
+  const [assets, setAssets] = useState([]);
   const navigate = useNavigate();
+  const displayType = type ? type.charAt(0).toUpperCase() + type.slice(1) : "";
 
   const NoAssets = (
     <div className="text-center py-20 text-lg">
@@ -14,14 +16,32 @@ const AssetProperty = ({ assets = []}) => {
     </div>
   );
 
+  useEffect(() => {
+    const fetchAssets = async () => {
+      setAssets([]); 
+      try {
+        const res = await axios.get(
+          `https://easy-renting-bn.onrender.com/api/property-asset/type/${displayType}`
+        );
+        setAssets(res.data);
+      } catch (err) {
+        console.error("Failed to fetch assets:", err);
+      }
+    };
+
+    fetchAssets();
+  }, [displayType]);
+
   const handleViewDetails = (id) => {
     navigate(`/asset/${id}`);
   };
 
   return (
+    <>
+    <NavBar />
     <div className="mx-auto mt-30">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-        Other Property
+        {displayType} Listings
       </h2>
 
       {assets.length === 0 ? (
@@ -73,7 +93,10 @@ const AssetProperty = ({ assets = []}) => {
         </div>
       )}
     </div>
+    <Footer />
+    </>
+    
   );
 };
 
-export default AssetProperty;
+export default GetAssetPropertyByType;

@@ -1,4 +1,4 @@
- import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from "react-icons/fa";
 import arrow from '../../src/assets/down-arrow.png';
@@ -45,7 +45,7 @@ export const NavBar = () => {
 			{/* Main Navigation */}
 			<div className="flex items-center justify-between px-4 py-3 bg-white shadow-md md:px-8">
 				<Link to="/" className="text-xl font-bold text-green-700">
-					GREAT CONNECTION BUSINESS GROUP
+					GREAT CONNECTION 
 				</Link>
 				<button className="md:hidden text-green-700 text-2xl" onClick={toggleMenu}>
 					{isOpen ? <FaTimes /> : <FaBars />}
@@ -66,7 +66,6 @@ export const NavBar = () => {
 								<Link to="/get-properties/type/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Hotel</Link>
 								<Link to="/get-properties/type/Apartment" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Apartment</Link>
 								<Link to="/asset-property/Land" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Land</Link>
-								<Link to="/asset-property/Clothes" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Clothes</Link>
 								<Link to="/asset-property/Car" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Car</Link>
 								<Link to="/asset-property/Motorcycle" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Motorcycle</Link>
 								<Link to="/asset-property/Other" className="block px-4 py-2 hover:bg-green-600 hover:text-white"> Other Properties</Link>
@@ -74,8 +73,9 @@ export const NavBar = () => {
 						)}
 					</div>
 
-					<Link to="/supply-property" className="hover:text-green-800">Supply Property</Link>
-					<Link to="/request-property" className="hover:text-green-800">Request Property</Link>
+					
+					<Link to="/login" className="hover:text-green-800">Request Property</Link>
+					<Link to="/login" className="hover:text-green-800">Supply Property</Link>
 					<Link to="/contact" className="hover:text-green-800">Contact</Link>
 				</nav>
 			</div>
@@ -99,7 +99,6 @@ export const NavBar = () => {
 									<Link to="/get-properties/type/Hotel" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Hotel</Link>
 									<Link to="/get-properties/type/Apartment" className="block px-4 py-2 hover:text-green-800" onClick={() => setIsOpen(false)}>Apartment</Link>
 								    <Link to="/asset-property/Land" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Land</Link>
-								    <Link to="/asset-property/Clothes" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}> Clothes</Link>
 									<Link to="/asset-property/Car" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}>Car</Link>
 									<Link to="/asset-property/Motorcycle" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}>Motorcycle</Link>
 									<Link to="/asset-property/Other" className="block px-4 py-2 hover:bg-green-600 hover:text-white" onClick={() => setIsOpen(false)}>Other Properties</Link>
@@ -107,10 +106,9 @@ export const NavBar = () => {
 							)}
 						</div>
 
-						<Link to="/supply-property" className="p-3 border-b hover:text-green-800" onClick={() => setIsOpen(false)}>
-							Supply Property
-						</Link>
-						<Link to="/request-property" className="p-3  hover:text-green-800" onClick={() => setIsOpen(false)}>Request Property</Link>
+						
+						<Link to="/login" className="p-3  hover:text-green-800" onClick={() => setIsOpen(false)}>Request Property</Link>
+						<Link to="/login" className="p-3  hover:text-green-800" onClick={() => setIsOpen(false)}>Supply Property</Link>
 						<Link to="/contact" className="p-3 hover:text-green-800" onClick={() => setIsOpen(false)}>
 							Contact
 						</Link>
