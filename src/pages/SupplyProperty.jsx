@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SupplyCard from '../components/Admin/SupplyCard';
+import SupplyCard from '../components/SupplyCard';
 import axios from 'axios';
 import { NavBar } from '../components/NavBar';
 import Footer from '../components/Footer';
+import UserNavbar from '../components/UserNavbar';
 
 const SupplyProperty = () => {
   const [properties, setProperties] = useState([]);
@@ -46,7 +47,7 @@ const SupplyProperty = () => {
 
   return (
     <>
-      <NavBar />
+      <UserNavbar />
       <div className="container mx-auto mt-40 px-6 mb-6 flex justify-center items-center flex-col bg-gray-100">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Supplied Properties</h2>
 

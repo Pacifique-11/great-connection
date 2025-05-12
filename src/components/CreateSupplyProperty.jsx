@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from "axios";
+import WelcomeBanner from '../components/WelcomeBanner';
 const CreateSupplyProperty = () => {
 	const [formData, setFormData] = useState({
 		id: "",
@@ -21,6 +22,7 @@ const CreateSupplyProperty = () => {
 	  });  
 	  const [feature, setFeature] = useState("");
       const [features, setFeatures] = useState([]);
+	  const [successMessage, setSuccessMessage] = useState("");
 
 	  const addFeature = () => {
 		if (feature.trim()) {
@@ -58,7 +60,7 @@ const CreateSupplyProperty = () => {
 		  });
 	  
 		  console.log("Success:", res.data);
-		  alert("supplied submitted successfully!");
+		  setSuccessMessage("supplied submitted successfully!");
 	  
 		  setFormData({
 			id: "",
@@ -78,7 +80,11 @@ const CreateSupplyProperty = () => {
 			timeAgo: "",
 			image: null,
 		  });
-	  
+		  
+		  setTimeout(() => {
+			setSuccessMessage("");
+		  }, 3000);
+		
 		} catch (error) {
 		  console.error("Error submitting request:", error.response?.data || error.message);
 		  alert("Something went wrong while submitting the request.");
@@ -87,7 +93,10 @@ const CreateSupplyProperty = () => {
 	
 
   return (
-    <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
+	<>
+     <WelcomeBanner />
+
+    <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg py-10">
       <h2 className="text-2xl font-bold mb-4 text-center">SUPPLY PROPERTY</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
@@ -147,7 +156,19 @@ const CreateSupplyProperty = () => {
         <input type="file" onChange={handleImageUpload} name="image" className="border p-2 rounded w-full cursor-pointer"  />
         <button type="submit" className="bg-green-500 text-white p-2 rounded w-full hover:bg-blue-600">Submit</button>
       </form>
+	  {successMessage && <p className="text-center text-green-500 mt-4">{successMessage}</p>}
     </div>
+
+	<div className="back-to-home flex items-center justify-center flex-col mt-4 space-4 flext-wrap">
+	  <p className="text-gray-600">Go back to the home page</p>
+      <button
+        onClick={() => navigate('/')}
+        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover:rotate-4 transition duration-300"
+      >
+        Back to Home
+      </button>
+    </div>
+	</>
   );
 };
 

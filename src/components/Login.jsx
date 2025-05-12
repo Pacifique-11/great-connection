@@ -35,18 +35,20 @@ const Login = () => {
         }
       );
       localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-  
-	  
-	  setSuccessMessage('Login successful! Redirecting...'); 
-	  const userRole = response.data.user?.role;
+      localStorage.setItem('user', JSON.stringify(response.data.user))
+
+      const userData = JSON.parse(localStorage.getItem('user'));
+       const token = localStorage.getItem('token');
+
+    setSuccessMessage('Login successful! Redirecting...'); 
+	   const userRole = userData.role;
       setTimeout(() => {
-        if (userRole === 'seller') {
+        if (userRole === 'seller' && token) {
           navigate('/supplied-property');
-        } else if (userRole === 'buyer') {
+        } else if (userRole === 'buyer' && token) {
           navigate('/property-requested');
-        } else if (userRole === 'admin') {
-          navigate('/dashboard');
+        } else if (userRole === 'admin' && token) {
+          navigate('/admin-panel');
         } else {
           navigate('/'); 
         }
@@ -73,7 +75,7 @@ const Login = () => {
   }, [error, successMessage]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 mt-10">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-6">
         <form onSubmit={handleLogin} className="mt-4">
           <div className="mb-4">

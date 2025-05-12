@@ -2,6 +2,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from "axios"; 
+import WelcomeBanner from '../components/WelcomeBanner';
 
 const RequestProperty = () => {
   const [formData, setFormData] = useState({
@@ -68,10 +69,27 @@ const RequestProperty = () => {
         },
       });
       setSuccessMessage("Your request has been submitted successfully!");
-      console.log("Response:", response.data);
+      console.log("Response:",successMessage);
 
       setTimeout(() => {
         setSuccessMessage("");
+        setFormData({
+          title: "",
+          price: "",
+          status: "",
+          location: "",
+          requesterName: "",
+          contact: "",
+          description: "",
+          bedrooms: "",
+          bathrooms: "",
+          toilets: "",
+          area: "",
+          type: "",
+          features: [],
+          image: null,
+        });
+
       }, 5000);
     } catch (error) {
       console.error("Error submitting request:", error);
@@ -83,7 +101,9 @@ const RequestProperty = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg py-10">
+    <>
+     <WelcomeBanner />
+    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg py-10">
       <h2 className="text-2xl font-bold mb-4 text-center">REQUEST PROPERTY</h2>
 
       {successMessage && <p className="text-green-500 text-center">{successMessage}</p>}
@@ -229,6 +249,18 @@ const RequestProperty = () => {
 
       </form>
     </div>
+
+    
+	<div className="back-to-home flex items-center justify-center flex-col my-4 space-4 flext-wrap ">
+	  <p className="text-gray-600">Go back to the home page</p>
+      <button
+        onClick={() => navigate('/')}
+        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 hover:rotate-4 transition duration-300"
+      >
+        Back to Home
+      </button>
+    </div>
+    </>
   );
 };
 
