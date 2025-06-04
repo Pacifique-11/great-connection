@@ -73,7 +73,7 @@ const Contact = () => {
             <h3 className="font-semibold text-gray-600">Follow Us On</h3>
           </div>
           <div className="flex flex-wrap gap-4 mt-3 text-green-500 text-xl">
-            <a href="https://web.facebook.com/dusabimana.paccy.5" className="hover:text-green-700 gap-2 flex ">
+            <a href="https://www.facebook.com/61576982134559/videos/698814396210061" className="hover:text-green-700 gap-2 flex ">
               <img className="h-8 w-8" src={facebook} alt="facebook" /> facebook
             </a>
             <a href="https://www.instagram.com/pacifique_dusabimana" className="hover:text-green-700 flex gap-2">
@@ -89,7 +89,7 @@ const Contact = () => {
               <img className="h-8" src={twitter} alt="instagram" /> Twitter-X
             </a>
             <a
-              href="https://www.youtube.com/@pacifiquedusabimana135"
+              href="https://www.youtube.com/watch?v=8PA9srK8ePI&t=33s"
 
               className="hover:text-green-700 flex gap-2">
               <img className="h-8" src={youtube} alt="youtube" /> Youtube
