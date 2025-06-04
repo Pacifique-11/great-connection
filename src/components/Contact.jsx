@@ -76,16 +76,16 @@ const Contact = () => {
             <a href="https://www.facebook.com/61576982134559/videos/698814396210061" className="hover:text-green-700 gap-2 flex ">
               <img className="h-8 w-8" src={facebook} alt="facebook" /> facebook
             </a>
-            <a href="https://www.instagram.com/pacifiqua" className="hover:text-green-700 flex gap-2">
+            <a href="#" className="hover:text-green-700 flex gap-2" disable>
               <img className="h-8 w-8" src={instagram} alt="instagram" /> Instagram
             </a>
-            <a href="https://www.linkedin.com/in/pacifique-dusabi0/" className="hover:text-green-700 flex gap-2 ">
+            <a href="#" className="hover:text-green-700 flex gap-2 " disable>
               <img className="h-8 w-8" src={linkedin} alt="linkedin" /> linkedin
             </a>
-            <a href="https://www.tiktok.com/@pacifiqu_d1 " className="hover:text-green-700 flex gap-2">
+            <a href="#"hover:text-green-700 flex gap-2" disable>
               <img className="h-10 w-10" src={tiktok} alt="instagram" /> Tiktok
             </a>
-            <a href="https://www.tiktok.com/@pacifiqu_d1 " className="hover:text-green-700 flex gap-2">
+            <a href="#" className="hover:text-green-700 flex gap-2" disable>
               <img className="h-8" src={twitter} alt="instagram" /> Twitter-X
             </a>
             <a
