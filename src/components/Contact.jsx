@@ -76,16 +76,16 @@ const Contact = () => {
             <a href="https://www.facebook.com/61576982134559/videos/698814396210061" className="hover:text-green-700 gap-2 flex ">
               <img className="h-8 w-8" src={facebook} alt="facebook" /> facebook
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2" disable>
+            <a href="#" className="hover:text-green-700 flex gap-2">
               <img className="h-8 w-8" src={instagram} alt="instagram" /> Instagram
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2 " disable>
+            <a href="#" className="hover:text-green-700 flex gap-2 ">
               <img className="h-8 w-8" src={linkedin} alt="linkedin" /> linkedin
             </a>
-            <a href="#"hover:text-green-700 flex gap-2" disable>
+            <a href="#"hover:text-green-700 flex gap-2">
               <img className="h-10 w-10" src={tiktok} alt="instagram" /> Tiktok
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2" disable>
+            <a href="#" className="hover:text-green-700 flex gap-2">
               <img className="h-8" src={twitter} alt="instagram" /> Twitter-X
             </a>
             <a
