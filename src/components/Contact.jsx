@@ -79,7 +79,7 @@ const Contact = () => {
             <a href="https://www.instagram.com/greatconnectionltd" className="hover:text-green-700 flex gap-2">
               <img className="h-8 w-8" src={instagram} alt="instagram" /> Instagram
             </a>
-            <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a/" className="hover:text-green-700 flex gap-2 ">
+            <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" className="hover:text-green-700 flex gap-2 ">
               <img className="h-8 w-8" src={linkedin} alt="linkedin" /> linkedin
             </a>
             <a href="https://www.tiktok.com/@greatconnectionltd.com" className="hover:text-green-700 flex gap-2">
