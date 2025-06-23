@@ -73,20 +73,20 @@ const Contact = () => {
             <h3 className="font-semibold text-gray-600">Follow Us On</h3>
           </div>
           <div className="flex flex-wrap gap-4 mt-3 text-green-500 text-xl">
-            <a href="https://www.facebook.com/61576982134559/videos/698814396210061" className="hover:text-green-700 gap-2 flex ">
+            <a href="https://www.facebook.com/profile.php?id=61576982134559" className="hover:text-green-700 gap-2 flex ">
               <img className="h-8 w-8" src={facebook} alt="facebook" /> facebook
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2">
+            <a href="https://www.instagram.com/greatconnectionltd" className="hover:text-green-700 flex gap-2">
               <img className="h-8 w-8" src={instagram} alt="instagram" /> Instagram
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2 ">
+            <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a/" className="hover:text-green-700 flex gap-2 ">
               <img className="h-8 w-8" src={linkedin} alt="linkedin" /> linkedin
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2">
-              <img className="h-10 w-10" src={tiktok} alt="instagram" /> Tiktok
+            <a href="https://www.tiktok.com/@greatconnectionltd.com" className="hover:text-green-700 flex gap-2">
+              <img className="h-10 w-10" src={tiktok} alt="tiktok" /> Tiktok
             </a>
-            <a href="#" className="hover:text-green-700 flex gap-2">
-              <img className="h-8" src={twitter} alt="instagram" /> Twitter-X
+            <a href="https://x.com/greatconection" className="hover:text-green-700 flex gap-2">
+              <img className="h-8" src={twitter} alt="twitter" /> Twitter-X
             </a>
             <a
               href="https://www.youtube.com/watch?v=8PA9srK8ePI&t=33s"
