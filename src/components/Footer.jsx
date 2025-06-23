@@ -53,7 +53,7 @@ const Footer = () => {
             Are you considering investing in real estate in Rwanda? great connection
             can help you find the best deal in Kigali. We offer a variety
             of real estate services, including finding buy a property or
-            rent in Kigali, such as houses, land, apartments, and cars.
+            rent in Kigali, such as hotels, houses, land, apartments, cars and motorcycles.
           </p>
         </div>
 
@@ -107,7 +107,7 @@ const Footer = () => {
             <p className="flex items-center mt-2 text-gray-300">
               <IoLocationSharp className="mr-2 text-green-700" />
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Kigali-Nyarugenge,+Makuza+plaza"
+                href="https://www.google.com/maps/search/?api=1&query=Kigali-Nyarugenge,Nyamirambo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -118,14 +118,14 @@ const Footer = () => {
 
             <p className="flex items-center mt-2 text-gray-300">
               <IoMail className="mr-2 text-green-700" />
-              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=juniorally910@gmail.com" className="hover:underline">
-                pacifique.rw@gmail.com
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=greatconnectionltd@gmail.com" className="hover:underline">
+                greatconnectionltd@gmail.com
               </a>
             </p>
 
             <p className="flex items-center mt-2 text-gray-300">
               <IoCall className="mr-2 text-green-700" />
-              <a href="tel:+250785711348" className="hover:underline">
+              <a href="tel:+250784008814" className="hover:underline">
                 +250 784008814
               </a>
             </p>
@@ -137,38 +137,38 @@ const Footer = () => {
       <div className="mt-8 flex justify-between items-center">
         <div className="flex space-x-4">
           <a
-            href="https://web.facebook.com/dusabimana.paccy.5"
+            href="https://www.facebook.com/profile.php?id=61576982134559"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"         >
             <FaFacebook />
           </a>
           <a
-            href="https://www.youtube.com/@pacifiquedusabimana135"
+            href="http://youtube.com/watch?v=8PA9srK8ePI&t=33s"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"         >
             <FaYoutube />
           </a>
           <a
-            href="https://www.instagram.com/pacifique_dusabimana/"
+            href="https://www.instagram.com/greatconnectionltd"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"         >
             <FaInstagram />
           </a>
-          <a href="https://x.com/Pacifique11111" target='_blank' rel="noopener noreferrer" className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"
+          <a href="https://x.com/greatconection" target='_blank' rel="noopener noreferrer" className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"
           >            <FaXTwitter />
 
 
           </a>
-          <a href="https://www.linkedin.com/in/pacifique-dusabimana-51a48a350/" className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300" rel="noopener noreferrer" target='_blank'>
+          <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300" rel="noopener noreferrer" target='_blank'>
 
             <FaLinkedin />
 
           </a>
           <a
-            href="https://www.tiktok.com/@pacifique.11_d1/"
+            href="https://www.tiktok.com/@greatconnectionltd.com"
             className="hover:text-green-700 flex gap-2 cursor-pointer transition duration-300"
             rel="noopener noreferrer"
             target="_blank"
