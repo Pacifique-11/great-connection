@@ -16,7 +16,7 @@ const PropertyDetail = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/get-property/${id}`);
+        const response = await axios.get(`https://greatconnectionltd.onrender.com/api/get-property/${id}`);
         const data = response.data.property;
         setProperty(data); 
       } catch (err) {
@@ -105,7 +105,7 @@ const PropertyDetail = () => {
     )}
   </div>
 </div>
-	  <ContactForm endpoint={"https://easy-renting-bn.onrender.com/api/request-inform"}  />
+	  <ContactForm endpoint={"https://greatconnectionltd.onrender.com/api/request-inform"}  />
     </div>
     <Footer />
     </>

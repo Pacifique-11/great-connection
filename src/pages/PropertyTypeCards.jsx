@@ -18,7 +18,7 @@ const PropertyTypeCards = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/get-properties/type/${displayType}`);
+        const response = await axios.get(`https://greatconnectionltd.onrender.com/api/get-properties/type/${displayType}`);
         setProperties(response.data.properties);
       } catch (err) {
         setError('Failed to fetch properties. Please try again later.');

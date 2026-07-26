@@ -11,8 +11,8 @@ const RentOtherProperties = () => {
     const fetchProperties = async () => {
       try {
         const [landResponse, clothesResponse] = await Promise.all([
-          axios.get("https://easy-renting-bn.onrender.com/api/lands"),
-          axios.get("https://easy-renting-bn.onrender.com/api/clothes"),
+          axios.get("https://greatconnectionltd.onrender.com/api/lands"),
+          axios.get("https://greatconnectionltd.onrender.com/api/clothes"),
         ]);
 
         const combinedProperties = [

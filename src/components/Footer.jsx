@@ -14,7 +14,7 @@ const Footer = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('https://easy-renting-bn.onrender.com/api/subscribe', { email });
+      const res = await axios.post('https://greatconnectionltd.onrender.com/api/subscribe', { email });
 
       if (res.status === 201) {
         setMessage(res.data.message);

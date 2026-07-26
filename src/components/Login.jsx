@@ -26,7 +26,7 @@ const Login = () => {
     try {
 		
       const response = await axios.post(
-        'https://easy-renting-bn.onrender.com/api/login',
+        'https://greatconnectionltd.onrender.com/api/login',
         formData,
         {
           headers: {

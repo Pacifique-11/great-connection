@@ -21,7 +21,7 @@ const GetAssetPropertyByType = () => {
       setAssets([]); 
       try {
         const res = await axios.get(
-          `https://easy-renting-bn.onrender.com/api/property-asset/type/${displayType}`
+          `https://greatconnectionltd.onrender.com/api/property-asset/type/${displayType}`
         );
         setAssets(res.data);
       } catch (err) {

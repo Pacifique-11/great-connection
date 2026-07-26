@@ -30,7 +30,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://easy-renting-bn.onrender.com/api/signup', formData, {
+      const response = await axios.post('https://greatconnectionltd.onrender.com/api/signup', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

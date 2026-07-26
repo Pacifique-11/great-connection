@@ -27,7 +27,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://easy-renting-bn.onrender.com/api/create-message", formData);
+      const response = await axios.post("https://greatconnectionltd.onrender.com/api/create-message", formData);
       setResponseMessage(response.data.message);
       setErrorMessage("");
       setFormData({ username: "", email: "", message: "" });

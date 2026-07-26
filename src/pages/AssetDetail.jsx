@@ -11,7 +11,7 @@ const AssetDetailPage = () => {
   useEffect(() => {
     const fetchAsset = async () => {
       try {
-        const res = await axios.get(`https://easy-renting-bn.onrender.com/api/property-asset/${id}`);
+        const res = await axios.get(`https://greatconnectionltd.onrender.com/api/property-asset/${id}`);
         setAsset(res.data);
       } catch (error) {
         console.error("Failed to fetch asset details:", error);

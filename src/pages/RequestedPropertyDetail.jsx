@@ -12,7 +12,7 @@ const RequestedPropertyDetail = () => {
   useEffect(() => {
     const fetchPropertyDetails = async () => {
       try {
-        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/request-property/${id}`);
+        const response = await axios.get(`https://greatconnectionltd.onrender.com/api/request-property/${id}`);
         const data = response.data.data;
         setProperty(data);
       } catch (err) {
