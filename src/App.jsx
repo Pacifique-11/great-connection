@@ -35,6 +35,7 @@ import RequestProperty from './admin-panel/pages/RequestedProperties';
 import RequestPropertyDetail from './admin-panel/pages/RequestedPropertyDetail';
 import SuppliedProperty from './admin-panel/pages/SupplyProperty';
 import SuppliedPropertyDetail from './admin-panel/pages/SupplyDetail';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -76,21 +77,7 @@ function App() {
         <Route path="/admin-panel/requested-property" element={<RequestProperty />} />
         <Route path="/admin-panel/supplied-property" element={<SuppliedProperty />} />
         {/* 404 Page Not Found */}
-        <Route
-          path="*"
-          element={
-            <div className="flex flex-col items-center shadow-md p-6 mt-25">
-              <h3 className="font-bold my-3 text-red-600">
-                Oooops! Requested Page Not Found!
-              </h3>
-              <Link to="/">
-                <button className="py-3 px-4 rounded-lg bg-black text-white hover:bg-gray-800 transition">
-                  Back | Home
-                </button>
-              </Link>
-            </div>
-          }
-        />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );
