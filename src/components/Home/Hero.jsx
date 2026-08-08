@@ -34,7 +34,7 @@ const HeroSection = () => {
         {/* Welcome Badge */} <div className="mb-5"> 
           <span className="inline-block px-4 py-2 rounded-full bg-green-500/20 border border-green-400/40 text-green-300 text-sm sm:text-base font-semibold backdrop-blur-sm">
             Welcome to Great Connection Ltd </span> </div> {/* Main Title */} 
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-[1.15] sm:leading-[1.2] mb-6 drop-shadow-md">
+        <h1 className="text-1xl capitalize sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-[1.15] sm:leading-[1.2] mb-6 drop-shadow-md">
           your trusted partner for real estate and
           <br className="hidden sm:inline" />
           <span className="text-green-400"> 
