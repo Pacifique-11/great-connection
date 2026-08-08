@@ -21,7 +21,7 @@ const HeroSection = () => {
       {/* Background Image with Dark Professional Gradient Overlay */}
       <div className="absolute inset-0">
         <img
-          src="./homeImage.jpg"
+          src="https://www.greatconnectionltd.com/homeImage.jpg"
           alt="Rwanda Real Estate Landscape"
           className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-700 hover:scale-105"
         />
