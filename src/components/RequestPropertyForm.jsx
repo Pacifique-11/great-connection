@@ -63,7 +63,7 @@ const RequestProperty = () => {
     });
 
     try {
-      const response = await axios.post("https://easy-renting-bn.onrender.com/api/request-property", formDataToSend, {
+      const response = await axios.post("https://greatconnectionltd.onrender.com/api/request-property", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

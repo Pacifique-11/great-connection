@@ -3,42 +3,76 @@ import React from 'react';
 import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
 
 export default function PropertyCard({ property, onEdit, onDelete, onView }) {
+  // Fallbacks for safe rendering
+  const title = property.title || property.name || 'Untitled Property';
+  const location = property.location || 'Location not specified';
+  const description = property.description 
+    ? (property.description.length > 60 ? property.description.slice(0, 60) + '...' : property.description)
+    : 'No description available.';
+  const price = property.price 
+    ? (property.price.toString().startsWith('RWF') || property.price.toString().startsWith('RwF') ? property.price : `RWF ${property.price}`)
+    : 'N/A';
+  const status = property.status ? property.status.toUpperCase() : 'AVAILABLE';
+
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden w-full sm:w-1/2 lg:w-[400px] m-2">
-      <img src={property.image} alt={property.title} className="h-48 w-full object-cover" />
-      <div className="p-4">
-        <h2 className="font-semibold text-xl">{property.title}</h2>
-        <p className="text-sm text-gray-600">{property.location}</p>
-        <p className="text-gray-700 text-sm mt-1">{property.description.slice(0, 60)}...</p>
-        <p className="font-semibold text-green-600 mt-2">Price:Rwf{property.price}</p>
-        <div className="text-sm text-gray-500 mt-1">Status: {property.status}</div>
+    <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col justify-between border border-gray-100 w-full">
+      <div>
+        {/* Property Image */}
+        <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+          <img 
+            src={property.image || "https://via.placeholder.com/400"} 
+            alt={title} 
+            className="h-full w-full object-cover hover:scale-105 transition-transform duration-500" 
+          />
+          <span className={`absolute top-2 right-2 px-2.5 py-1 text-white text-xs font-semibold rounded-md shadow-sm ${
+            status === "SOLD" ? "bg-orange-500" : "bg-green-500"
+          }`}>
+            {status}
+          </span>
+        </div>
 
-<div className="flex flex-wrap justify-center mt-4 space-x-2">
-  <button 
-    onClick={() => onView(property)} 
-    title="View"
-    className="flex items-center justify-center text-blue-600 bg-blue-100 hover:bg-blue-200 rounded-md p-2 w-auto mt-2 cursor-pointer">
-    <FiEye className="mr-2" />
-    <span className="hidden sm:inline">View</span>
-  </button>
+        {/* Content Area */}
+        <div className="p-5">
+          <h2 className="font-bold text-lg text-gray-800 truncate" title={title}>{title}</h2>
+          <p className="text-sm text-gray-500 mt-0.5 truncate">{location}</p>
+          <p className="text-gray-600 text-sm mt-2 line-clamp-2">{description}</p>
+          
+          <div className="mt-4 flex items-center justify-between">
+            <span className="font-extrabold text-green-600 text-lg">{price}</span>
+          </div>
+        </div>
+      </div>
 
-  <button 
-    onClick={() => onEdit(property)} 
-    title="Edit"
-    className="flex items-center justify-center text-green-600 bg-green-100 hover:bg-green-200 rounded-md p-2 w-auto mt-2 cursor-pointer">
-    <FiEdit className="mr-2" />
-    <span className="hidden sm:inline">Edit</span>
-  </button>
+      {/* Action Buttons */}
+      <div className="px-5 pb-5 pt-0">
+        <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-100">
+          <button 
+            onClick={() => onView(property)} 
+            title="View Details"
+            className="flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
+          >
+            <FiEye className="mr-1.5" />
+            <span>View</span>
+          </button>
 
-  <button 
-    onClick={() => onDelete(property._id)} 
-    title="Delete"
-    className="flex items-center justify-center text-red-600 bg-red-100 hover:bg-red-200 rounded-md p-2 w-auto mt-2 cursor-pointer">
-    <FiTrash2 className="mr-2" />
-    <span className="hidden sm:inline">Delete</span>
-  </button>
-</div>
+          <button 
+            onClick={() => onEdit(property)} 
+            title="Edit Property"
+            className="flex items-center justify-center text-green-600 bg-green-50 hover:bg-green-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
+          >
+            <FiEdit className="mr-1.5" />
+            <span>Edit</span>
+          </button>
 
+          <button 
+            onClick={() => onDelete(property._id || property.id)} 
+            title="Delete Property"
+            className="flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
+          >
+            <FiTrash2 className="mr-1.5" />
+            <span>Delete</span>
+          </button>
+        </div>
       </div>
     </div>
   );

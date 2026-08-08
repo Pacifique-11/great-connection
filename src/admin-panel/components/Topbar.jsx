@@ -9,7 +9,7 @@ export default function Topbar({ onToggleSidebar }) {
   const handleLogout = async () => {
     try {
 
-      await axios.post('http://localhost:3000/api/logout'); 
+      await axios.post('https://greatconnectionltd.onrender.com/api/logout'); 
 
       localStorage.removeItem('token'); // Remove token from local storage
       localStorage.removeItem('user'); // Remove user data from local storage

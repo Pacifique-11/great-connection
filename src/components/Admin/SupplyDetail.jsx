@@ -12,7 +12,7 @@ const SupplyDetail = () => {
     const fetchProperty = async () => {
       try {
         const res = await axios.get(
-          `https://easy-renting-bn.onrender.com/api/supply-property/${id}`
+          `https://greatconnectionltd.onrender.com/api/supply-property/${id}`
         );
         console.log("Property Data", res.data);
         setProperty(res.data.data);
@@ -108,7 +108,7 @@ const SupplyDetail = () => {
         </div>
       </div>
 
-	  <ContactForm  endpoint={"https://easy-renting-bn.onrender.com/api/request-inform"}/>
+	  <ContactForm  endpoint={"https://greatconnectionltd.onrender.com/api/request-inform"}/>
     </div>
   );
 };

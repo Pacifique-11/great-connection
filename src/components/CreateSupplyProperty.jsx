@@ -53,7 +53,7 @@ const CreateSupplyProperty = () => {
 			if (value) data.append(key, value);
 		  });
 	  
-		  const res = await axios.post("https://easy-renting-bn.onrender.com/api/supply-property", data, {
+		  const res = await axios.post("https://greatconnectionltd.onrender.com/api/supply-property", data, {
 			headers: {
 			  "Content-Type": "multipart/form-data",
 			},
