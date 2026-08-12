@@ -83,7 +83,7 @@ export const NavBar = () => {
                                 <Link to="/asset-property/Land" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Land</Link>
                                 <Link to="/asset-property/Car" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Vehicles</Link>
                                 <Link to="/asset-property/Motorcycle" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Motorcycles</Link>
-                                <Link to="/asset-property/Other" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Other Properties</Link>
+                                <Link to="/asset-property/Other" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Assets and Goods</Link>
                             </div>
                         )}
                     </div>
@@ -112,9 +112,9 @@ export const NavBar = () => {
                                 <div className="bg-gray-50 py-1 pl-4 flex flex-col space-y-1 border-t border-gray-100">
                                     <Link to="/get-properties/type/House" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>House</Link>
                                     <Link to="/asset-property/Land" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Land</Link>
-                                    <Link to="/asset-property/Car" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Car</Link>
-                                    <Link to="/asset-property/Motorcycle" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Motorcycle</Link>
-                                    <Link to="/asset-property/Other" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Other Properties</Link>
+                                    <Link to="/asset-property/Car" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Vehicles</Link>
+                                    <Link to="/asset-property/Motorcycle" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Motorcycles</Link>
+                                    <Link to="/asset-property/Other" className="block px-4 py-2.5 text-sm text-gray-600 hover:text-green-600 transition-colors" onClick={handleLinkClick}>Assets and Goods</Link>
                                 </div>
                             )}
                         </div>
