@@ -134,7 +134,6 @@ const AssetDetailPage = () => {
             <p><strong>Location:</strong> {asset.location || "Kigali, Rwanda"}</p>
             {asset.owner && <p><strong>Owner:</strong> {asset.owner}</p>}
             {asset.contact && <p><strong>Contact:</strong> {asset.contact}</p>}
-            {asset.timeAgo && <p><strong>Posted:</strong> {asset.timeAgo}</p>}
           </div>
 
           <hr className="my-6 border-gray-100" />

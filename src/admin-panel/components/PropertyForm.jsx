@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosClient from "../../api/axiosClient";
 
-export default function PropertyForm({ onCreated, editingProperty }) {
+export default function PropertyForm({ onCreated, editingProperty, onCancelEdit }) {
   const [formData, setFormData] = useState({
     title: "",
     status: "Rent",
@@ -23,16 +23,45 @@ export default function PropertyForm({ onCreated, editingProperty }) {
 
   useEffect(() => {
     if (editingProperty) {
-      setFormData({ ...editingProperty, image: null });
+      setFormData({ 
+        ...editingProperty, 
+        image: null,
+        bedrooms: editingProperty.bedrooms || 1,
+        bathrooms: editingProperty.bathrooms || 1,
+        toilets: editingProperty.toilets || 1,
+        features: editingProperty.features || []
+      });
+    } else {
+      resetForm();
     }
   }, [editingProperty]);
+
+  const resetForm = () => {
+    setFormData({
+      title: "",
+      status: "Rent",
+      location: "",
+      description: "",
+      price: "",
+      owner: "",
+      contact: "",
+      bedrooms: 1,
+      bathrooms: 1,
+      toilets: 1,
+      area: "",
+      type: "House",
+      features: [],
+      image: null,
+    });
+    setNewFeature("");
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: ["bedrooms", "bathrooms", "toilets"].includes(name)
-        ? parseInt(value)
+        ? parseInt(value) || 0
         : value,
     }));
   };
@@ -63,7 +92,7 @@ export default function PropertyForm({ onCreated, editingProperty }) {
     const payload = new FormData();
 
     for (let key in formData) {
-      if (formData[key] !== null) {
+      if (formData[key] !== null && formData[key] !== undefined) {
         if (Array.isArray(formData[key])) {
           formData[key].forEach((val) => payload.append(key, val));
         } else {
@@ -74,43 +103,41 @@ export default function PropertyForm({ onCreated, editingProperty }) {
 
     try {
       if (editingProperty) {
-        await axiosClient.put(
-          `/update-property/${editingProperty._id}`,payload);
+        await axiosClient.put(`/update-property/${editingProperty._id}`, payload);
       } else {
-        await axiosClient.post( "/create-property",payload );
+        await axiosClient.post("/create-property", payload);
       }
 
       onCreated();
-      setFormData({
-        title: "",
-        status: "Rent",
-        location: "",
-        description: "",
-        price: "",
-        owner: "",
-        contact: "",
-        bedrooms: 1,
-        bathrooms: 1,
-        toilets: 1,
-        area: "",
-        type: "House",
-        features: [],
-        image: null,
-      });
-      setNewFeature("");
+      resetForm();
     } catch (err) {
       console.error("Error submitting property:", err);
+      alert("Failed to save property changes. Please try again.");
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-lg rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-4 w-full"
+      className="bg-white shadow-lg rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-4 w-full border border-gray-100"
     >
-      <h2 className="text-2xl font-bold col-span-full mb-2 text-center">
-        {editingProperty ? "Update Property" : "Add New Property"}
-      </h2>
+      <div className="col-span-full flex justify-between items-center mb-2">
+        <h2 className="text-2xl font-bold text-gray-800">
+          {editingProperty ? `Editing: ${editingProperty.title}` : "Add New Property"}
+        </h2>
+        {editingProperty && (
+          <button
+            type="button"
+            onClick={() => {
+              resetForm();
+              if (onCancelEdit) onCancelEdit();
+            }}
+            className="text-sm text-gray-500 hover:text-red-600 underline font-medium"
+          >
+            Cancel Edit
+          </button>
+        )}
+      </div>
 
       <div className="mb-4 w-full">
         <label htmlFor="title" className="block font-medium mb-1">Property Title</label>
@@ -175,7 +202,6 @@ export default function PropertyForm({ onCreated, editingProperty }) {
           type="number"
           value={formData.bedrooms}
           onChange={handleChange}
-          placeholder="Enter number of bedrooms"
           className="border border-gray-300 p-2 rounded w-full"
           required
         />
@@ -189,7 +215,6 @@ export default function PropertyForm({ onCreated, editingProperty }) {
           type="number"
           value={formData.bathrooms}
           onChange={handleChange}
-          placeholder="Enter number of bathrooms"
           className="border border-gray-300 p-2 rounded w-full"
           required
         />
@@ -203,7 +228,6 @@ export default function PropertyForm({ onCreated, editingProperty }) {
           type="number"
           value={formData.toilets}
           onChange={handleChange}
-          placeholder="Enter number of toilets"
           className="border border-gray-300 p-2 rounded w-full"
           required
         />
@@ -257,9 +281,13 @@ export default function PropertyForm({ onCreated, editingProperty }) {
           onChange={handleChange}
           className="border border-gray-300 p-2 rounded w-full"
         >
-          <option>House</option>
-          <option>Apartment</option>
-          <option>Hotel</option>
+          <option value="">Select Property Type</option>
+          <option value="Apartment">Apartment</option>
+          <option value="House">House</option>
+          <option value="Land">Land</option>
+          <option value="Car">Car</option>
+          <option value="Motorcycle">Motorcycle</option>
+          <option value="Other">Other</option>
         </select>
       </div>
 
@@ -287,13 +315,13 @@ export default function PropertyForm({ onCreated, editingProperty }) {
           {formData.features.map((feature, idx) => (
             <span
               key={idx}
-              className="bg-gray-200 px-3 py-1 rounded-full flex items-center gap-2"
+              className="bg-gray-200 px-3 py-1 rounded-full flex items-center gap-2 text-sm"
             >
               {feature}
               <button
                 type="button"
                 onClick={() => handleRemoveFeature(idx)}
-                className="text-red-600 hover:text-red-800"
+                className="text-red-600 hover:text-red-800 font-bold"
               >
                 ×
               </button>
@@ -317,7 +345,9 @@ export default function PropertyForm({ onCreated, editingProperty }) {
       </div>
 
       <div className="mb-4 w-full">
-        <label htmlFor="image" className="block font-medium mb-1">Upload Property Image</label>
+        <label htmlFor="image" className="block font-medium mb-1">
+          {editingProperty ? "Replace Property Image (Optional)" : "Upload Property Image"}
+        </label>
         <input
           type="file"
           id="image"
@@ -326,12 +356,30 @@ export default function PropertyForm({ onCreated, editingProperty }) {
         />
       </div>
 
-      <button
-        type="submit"
-        className="col-span-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition mt-4"
-      >
-        {editingProperty ? "Update Property" : "Create Property"}
-      </button>
+      <div className="col-span-full flex gap-3 mt-4">
+        <button
+          type="submit"
+          className={`flex-1 text-white py-2.5 rounded transition font-semibold ${
+            editingProperty 
+              ? "bg-amber-600 hover:bg-amber-700" 
+              : "bg-green-600 hover:bg-green-700"
+          }`}
+        >
+          {editingProperty ? "Save Changes" : "Create Property"}
+        </button>
+        {editingProperty && (
+          <button
+            type="button"
+            onClick={() => {
+              resetForm();
+              if (onCancelEdit) onCancelEdit();
+            }}
+            className="px-5 bg-gray-300 text-gray-700 py-2.5 rounded hover:bg-gray-400 transition font-semibold"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 }

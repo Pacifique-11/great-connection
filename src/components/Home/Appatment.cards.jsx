@@ -2,7 +2,7 @@ import React from 'react';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCropSquare } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import SkeletonCard from '../SkeletonCard'; 
+import SkeletonCard from '../SkeletonCard';
 
 const ApartmentCards = ({ properties = [], isLoading = false }) => {
   const navigate = useNavigate();
@@ -23,11 +23,11 @@ const ApartmentCards = ({ properties = [], isLoading = false }) => {
   if (propertyList.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-300 mb-20">
-        <svg 
-          className="w-12 h-12 text-gray-400 mb-3" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="1.5" 
+        <svg
+          className="w-12 h-12 text-gray-400 mb-3"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
           viewBox="0 0 24 24"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -40,8 +40,8 @@ const ApartmentCards = ({ properties = [], isLoading = false }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-20">
       {propertyList.map((item) => (
-        <div 
-          key={item._id || item.id} 
+        <div
+          key={item._id || item.id}
           className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 flex flex-col overflow-hidden group"
         >
           {/* Image & Status Badge */}
@@ -50,6 +50,8 @@ const ApartmentCards = ({ properties = [], isLoading = false }) => {
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               src={item.image || 'https://via.placeholder.com/400x300?text=No+Image'}
               alt={item.title || 'Property Image'}
+              width="800"
+              height="450"
               loading="lazy"
             />
             {item.status && (
@@ -64,7 +66,7 @@ const ApartmentCards = ({ properties = [], isLoading = false }) => {
             <h3 className="text-xl font-extrabold text-gray-900 tracking-tight mt-1">
               RWF {typeof item.price === 'number' ? item.price.toLocaleString() : item.price}
             </h3>
-            
+
             <p className="text-gray-600 text-sm mt-2 line-clamp-2 leading-relaxed">
               {item.description ? `${item.description.substring(0, 80)}...` : 'No description provided.'}
             </p>

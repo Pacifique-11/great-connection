@@ -1,9 +1,14 @@
-// admin-panel/components/PropertyCard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { FiEdit, FiTrash2, FiEye } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import axiosClient from '../../api/axiosClient';
 
-export default function PropertyCard({ property, onEdit, onDelete, onView }) {
+export default function PropertyCard({ property, onDeleteSuccess }) {
+  const navigate = useNavigate();
+  const [isDeleting, setIsDeleting] = useState(false);
+
   // Fallbacks for safe rendering
+  const propertyId = property._id || property.id;
   const title = property.title || property.name || 'Untitled Property';
   const location = property.location || 'Location not specified';
   const description = property.description 
@@ -14,6 +19,34 @@ export default function PropertyCard({ property, onEdit, onDelete, onView }) {
     : 'N/A';
   const status = property.status ? property.status.toUpperCase() : 'AVAILABLE';
 
+  const handleView = () => {
+    navigate(`/admin-panel/property/${propertyId}`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/admin-panel/edit-property/${propertyId}`);
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm(`Are you sure you want to delete "${title}"?`)) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      await axiosClient.delete(`/api/properties/${propertyId}`);
+      
+      if (onDeleteSuccess) {
+        onDeleteSuccess(propertyId);
+      }
+    } catch (err) {
+      console.error('Failed to delete property:', err);
+      alert(err.response?.data?.message || 'Failed to delete the property. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col justify-between border border-gray-100 w-full">
       <div>
@@ -22,6 +55,9 @@ export default function PropertyCard({ property, onEdit, onDelete, onView }) {
           <img 
             src={property.image || "https://via.placeholder.com/400"} 
             alt={title} 
+            width="800"
+            height="450"
+            loading="lazy"
             className="h-full w-full object-cover hover:scale-105 transition-transform duration-500" 
           />
           <span className={`absolute top-2 right-2 px-2.5 py-1 text-white text-xs font-semibold rounded-md shadow-sm ${
@@ -47,7 +83,8 @@ export default function PropertyCard({ property, onEdit, onDelete, onView }) {
       <div className="px-5 pb-5 pt-0">
         <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-100">
           <button 
-            onClick={() => onView(property)} 
+            type="button"
+            onClick={handleView} 
             title="View Details"
             className="flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
           >
@@ -56,7 +93,8 @@ export default function PropertyCard({ property, onEdit, onDelete, onView }) {
           </button>
 
           <button 
-            onClick={() => onEdit(property)} 
+            type="button"
+            onClick={handleEdit} 
             title="Edit Property"
             className="flex items-center justify-center text-green-600 bg-green-50 hover:bg-green-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
           >
@@ -65,12 +103,14 @@ export default function PropertyCard({ property, onEdit, onDelete, onView }) {
           </button>
 
           <button 
-            onClick={() => onDelete(property._id || property.id)} 
+            type="button"
+            onClick={handleDelete} 
+            disabled={isDeleting}
             title="Delete Property"
-            className="flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium"
+            className="flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-100 rounded-lg py-2 px-2 transition-colors cursor-pointer text-sm font-medium disabled:opacity-50"
           >
             <FiTrash2 className="mr-1.5" />
-            <span>Delete</span>
+            <span>{isDeleting ? 'Deleting...' : 'Delete'}</span>
           </button>
         </div>
       </div>
