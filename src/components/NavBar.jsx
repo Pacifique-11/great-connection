@@ -49,7 +49,7 @@ export const NavBar = () => {
             {/* Main Navigation */}
             <div className="flex items-center justify-between px-4 py-3 bg-white shadow-sm md:px-8">
                 <div className="flex items-center gap-2">
-                    <img src="/logo.png" alt="Logo" className="h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+                    <img src="https://www.greatconnectionltd.com/Logo.png" alt="Logo" className="h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
                     <Link to="/" className="text-lg md:text-xl font-extrabold text-green-700 tracking-wider" onClick={handleLinkClick}>
                         GREAT CONNECTION LTD
                     </Link>
