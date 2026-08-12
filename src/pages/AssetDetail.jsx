@@ -148,8 +148,6 @@ const AssetDetailPage = () => {
                 <p><strong>Certified:</strong> {asset.certified ? "✅ Yes" : "❌ No"}</p>
                 <p><strong>Inspected:</strong> {asset.inspected ? "✅ Yes" : "❌ No"}</p>
                 {asset.warranty && <p><strong>Warranty:</strong> {asset.warranty}</p>}
-                {asset.rentalPrice && <p><strong>Rental Price:</strong> {asset.rentalPrice}</p>}
-                {asset.rentDuration && <p><strong>Rent Duration:</strong> {asset.rentDuration}</p>}
               </div>
             </div>
           )}

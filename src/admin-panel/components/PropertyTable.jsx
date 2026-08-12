@@ -85,10 +85,6 @@ export default function PropertyTable() {
         >
           <option value="">All Types</option>
           <option value="House">House</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Land">Land</option>
-          <option value="Car">Car</option>
-          <option value="Motorcycle">Motorcycle</option>
           <option value="Other">Other</option>
         </select>
         <select 

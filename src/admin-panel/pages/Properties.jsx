@@ -18,32 +18,9 @@ export default function Properties() {
             className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
           >
             <FiHome size={14} />
-            <span>Add House/Apt</span>
+            <span>Add House | Hotel | Apartment</span>
           </Link>
 
-          <Link
-            to="/admin-panel/create-new-property?category=Land"
-            className="inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
-          >
-            <FiMapPin size={14} />
-            <span>Add Land</span>
-          </Link>
-
-          <Link
-            to="/admin-panel/create-new-property?category=Car"
-            className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
-          >
-            <FiTruck size={14} />
-            <span>Add Vehicle/Moto</span>
-          </Link>
-
-          <Link
-            to="/admin-panel/create-new-property?category=Electronics"
-            className="inline-flex items-center gap-1.5 bg-amber-600 hover:bg-amber-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
-          >
-            <FiBox size={14} />
-            <span>Add Other Property</span>
-          </Link>
         </div>
       </div>
       <PropertyTable />
