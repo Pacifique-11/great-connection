@@ -37,7 +37,7 @@ const Footer = () => {
         <div className="space-y-4">
           {/* Logo Added Here */}
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" className="rounded-full h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+            <img src="https://www.greatconnectionltd.com/Logo.png" alt="Logo" className="rounded-full h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
             <Link to="/" className="text-lg md:text-xl font-extrabold text-green-700 tracking-wider">
               GREAT CONNECTION LTD
             </Link>
