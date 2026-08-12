@@ -1,8 +1,10 @@
+// src/components/Footer.jsx
 import React, { useState } from 'react';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaYoutube, FaXTwitter } from "react-icons/fa6";
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
 import { BsWhatsapp } from "react-icons/bs";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +14,6 @@ const Footer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim()) return;
-
     setLoading(true);
     setMessage('');
 
@@ -31,12 +32,21 @@ const Footer = () => {
   return (
     <footer className="bg-[#002F47] mt-12 text-white pt-16 pb-10 px-6 md:px-16">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-        
+
         {/* Brand Info */}
-        <div>
-          <h2 className="text-2xl font-bold text-green-500">GREAT CONNECTION LTD</h2>
+        <div className="space-y-4">
+          {/* Logo Added Here */}
+          <div className="flex items-center gap-2">
+            <img src="/logo.png" alt="Logo" className="rounded-full h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
+            <Link to="/" className="text-lg md:text-xl font-extrabold text-green-700 tracking-wider">
+              GREAT CONNECTION LTD
+            </Link>
+          </div>
           <p className="mt-4 text-gray-300 text-sm leading-relaxed">
-            Great Connection Ltd is a trusted real estate and vehicle trading company in Rwanda. We are committed to delivering reliable, transparent, and professional services that connect clients with the best investment opportunities.
+            Great Connection Ltd is a trusted real estate and vehicle Trading company, specializing in the buying and selling of houses, land, vehicles , and other valuable assets in Rwanda.
+          </p>
+          <p className="-mt-2 text-gray-300 text-sm leading-relaxed">
+            We are committed to delivering reliable, transparent, and professional services that connect clients with the best investment opportunities
           </p>
         </div>
 
@@ -54,20 +64,20 @@ const Footer = () => {
         {/* Newsletter & Contact */}
         <div className="space-y-8">
           <div>
-            <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block">Newsletter</h3>
-            <form onSubmit={handleSubmit} className="mt-4">
+            <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block"> Subscribe to Our Newsletter</h3>
+            <form onSubmit={handleSubmit} className="mt-4 flex items-center justify-center gap-2">
               <input
                 type="email"
                 required
                 placeholder="Enter your email"
-                className="w-full px-4 py-2 rounded-md bg-white text-gray-800 outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full px-4 py-2 rounded-md bg-white text-gray-800 outline-none"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-3 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50"
+                className="-ml-4 md:ml-0 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50"
               >
                 {loading ? 'Subscribing...' : 'Subscribe'}
               </button>

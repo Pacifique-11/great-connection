@@ -1,14 +1,17 @@
 // src/admin-panel/components/Sidebar.jsx
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import {FiHome, FiUsers, FiFileText, FiSettings, FiMessageCircle} from 'react-icons/fi';
+import { FiHome, FiUsers, FiFileText, FiBox, FiSettings, FiMessageCircle } from 'react-icons/fi';
+
 const navItems = [
   { name: 'Dashboard', icon: <FiHome />, path: '/admin-panel' },
   { name: 'Properties', icon: <FiFileText />, path: '/admin-panel/properties' },
+  { name: 'Assets & Goods', icon: <FiBox />, path: '/admin-panel/assets' },
   { name: 'Users', icon: <FiUsers />, path: '/admin-panel/users' },
   { name: 'Messages', icon: <FiMessageCircle />, path: '/admin-panel/messages' },
   { name: 'Settings', icon: <FiSettings />, path: '/admin-panel/settings' },
 ];
+
 export default function Sidebar({ isOpen, toggle }) {
   return (
     <>
@@ -31,13 +34,13 @@ export default function Sidebar({ isOpen, toggle }) {
               to={item.path}
               onClick={toggle}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-2 rounded hover:bg-blue-800 ${
-                  isActive ? 'bg-blue-800' : ''
+                `flex items-center gap-3 px-4 py-2 rounded transition-colors hover:bg-blue-800 ${
+                  isActive ? 'bg-blue-800 font-medium' : ''
                 }`
               }
             >
-              {item.icon}
-              {item.name}
+              <span className="text-lg">{item.icon}</span>
+              <span>{item.name}</span>
             </NavLink>
           ))}
         </nav>

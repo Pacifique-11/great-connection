@@ -41,17 +41,23 @@ export default function RequestedProperties() {
     }
   };
 
-  if (loading) {
-    return <h2 className="text-center text-gray-500 mt-10">Loading...</h2>;
+// handle empty state
+  if (!loading && requestedProperties.length === 0) {
+    return (
+      <MainLayout>
+        <div className="text-center py-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">No Requested Properties Found</h2>
+          <p className="text-gray-600">There are currently no requested properties available.</p>
+        </div>
+      </MainLayout>
+    );
   }
 
   if (error) {
     return <h2 className="text-center text-red-500 mt-10">{error}</h2>;
   }
 
-  if (!Array.isArray(requestedProperties) || requestedProperties.length === 0) {
-    return <h2 className="text-center text-gray-500 mt-10">No requested properties found.</h2>;
-  }
+
 
   return (
     <MainLayout>

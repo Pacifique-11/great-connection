@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Hero from "./Home/Hero";
 import ApartmentCards from "./Home/Appatment.cards";
 import Footer from "./Footer";
@@ -6,66 +7,64 @@ import AssetProperty from "./Home/AssetProperty";
 import SearchBar from "./Home/SearchBar";
 import { NavBar } from "./NavBar";
 
-const Home = () => {
-  const [defaultProperties, setDefaultProperties] = useState([]);
-  const [defaultAssets, setDefaultAssets] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+// Fetcher functions for TanStack Query
+const fetchProperties = async () => {
+  const res = await fetch('https://greatconnectionltd.onrender.com/api/properties');
+  if (!res.ok) throw new Error('Failed to fetch properties');
+  const propData = await res.json();
+  return Array.isArray(propData) ? propData : propData.properties || propData.data || propData.items || [];
+};
 
+const fetchAssets = async () => {
+  const res = await fetch('https://greatconnectionltd.onrender.com/api/assets');
+  if (!res.ok) throw new Error('Failed to fetch assets');
+  const assetData = await res.json();
+  return Array.isArray(assetData) ? assetData : assetData.assets || assetData.data || assetData.items || [];
+};
+
+const Home = () => {
   const [searchResults, setSearchResults] = useState(null);
 
-  // Fetch default properties and assets on initial page load
+  // Keep-alive ping on mount and every 10 minutes to prevent Render spin-down
   useEffect(() => {
-    const fetchInitialData = async () => {
+    const pingServer = async () => {
       try {
-        setIsLoading(true);
-        
-        // Fetch from your render backend endpoints
-        const [propRes, assetRes] = await Promise.all([
-          fetch('https://greatconnectionltd.onrender.com/api/properties').catch(() => null),
-          fetch('https://greatconnectionltd.onrender.com/api/assets').catch(() => null)
-        ]);
-
-        if (propRes && propRes.ok) {
-          const propData = await propRes.json();
-          console.log("Properties API Response:", propData); // Check your browser console to verify structure
-          
-          // Handles flat arrays, or objects like { data: [...] } or { properties: [...] }
-          const extractedProps = Array.isArray(propData) 
-            ? propData 
-            : propData.properties || propData.data || propData.items || [];
-          setDefaultProperties(extractedProps);
-        }
-
-        if (assetRes && assetRes.ok) {
-          const assetData = await assetRes.json();
-          console.log("Assets API Response:", assetData); // Check your browser console to verify structure
-          
-          const extractedAssets = Array.isArray(assetData) 
-            ? assetData 
-            : assetData.assets || assetData.data || assetData.items || [];
-          setDefaultAssets(extractedAssets);
-        }
+        await fetch('https://greatconnectionltd.onrender.com/api/assets', { method: 'HEAD' });
       } catch (error) {
-        console.error('Failed to fetch initial home data:', error);
-      } finally {
-        setIsLoading(false);
+        // Suppress network errors during cold starts
       }
     };
-
-    fetchInitialData();
+    pingServer();
+    const interval = setInterval(pingServer, 10 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
+
+  // Use TanStack Query for properties with caching
+  const { data: defaultProperties = [], isLoading: isPropsLoading } = useQuery({
+    queryKey: ['properties'],
+    queryFn: fetchProperties,
+    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+  });
+
+  // Use TanStack Query for assets with caching
+  const { data: defaultAssets = [], isLoading: isAssetsLoading } = useQuery({
+    queryKey: ['assets'],
+    queryFn: fetchAssets,
+    staleTime: 1000 * 60 * 5, // Cache data for 5 minutes
+  });
+
+  const isLoading = isPropsLoading || isAssetsLoading;
 
   const handleSearchResults = useCallback((results) => {
     setSearchResults(results);
   }, []);
 
-  // Determine what to display
+  // Determine what to display based on search state
   let displayedProperties = defaultProperties;
   let displayedAssets = defaultAssets;
 
   if (searchResults !== null) {
     if (Array.isArray(searchResults)) {
-      // If search returns a flat array, map it appropriately or put in properties
       displayedProperties = searchResults;
       displayedAssets = [];
     } else {
