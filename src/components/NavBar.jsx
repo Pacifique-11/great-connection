@@ -81,8 +81,8 @@ export const NavBar = () => {
                             <div className="absolute left-0 bg-white shadow-xl rounded-xl mt-2 w-52 py-2 border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-150">
                                 <Link to="/get-properties/type/House" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>House</Link>
                                 <Link to="/asset-property/Land" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Land</Link>
-                                <Link to="/asset-property/Car" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Car</Link>
-                                <Link to="/asset-property/Motorcycle" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Motorcycle</Link>
+                                <Link to="/asset-property/Car" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Vehicles</Link>
+                                <Link to="/asset-property/Motorcycle" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Motorcycles</Link>
                                 <Link to="/asset-property/Other" className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors" onClick={handleLinkClick}>Other Properties</Link>
                             </div>
                         )}

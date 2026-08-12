@@ -21,7 +21,7 @@ export default function Assets() {
             className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
           >
             <FiTruck size={14} />
-            <span>Add Car</span>
+            <span>Add Vehicle</span>
           </Link>
 
           <Link
@@ -58,7 +58,6 @@ export default function Assets() {
         </div>
       </div>
 
-      {/* Asset Table Component */}
       <AssetTable />
     </MainLayout>
   );
