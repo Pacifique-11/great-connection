@@ -6,14 +6,13 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full min-h-[200px] md:min-h-[280px] flex items-center justify-center overflow-hidden mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
-      {/* Background Image with Dark Professional Gradient Overlay */}
       <div className="absolute inset-0">
         <img
           src="./homeImage.jpg"
           alt="Rwanda Real Estate Landscape"
           fetchpriority="high"
-          loading="eager" // Changed from 'lazy' to 'eager' so the browser downloads it immediately
-          decoding="async" // Helps the browser render the image without blocking the main thread
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-700 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
