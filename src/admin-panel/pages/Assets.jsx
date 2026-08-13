@@ -53,7 +53,7 @@ export default function Assets() {
             className="inline-flex items-center gap-1.5 bg-purple-600 hover:bg-purple-700 text-white px-3.5 py-2 rounded-lg text-xs font-semibold shadow-sm transition"
           >
             <FiBox size={14} />
-            <span>Add Other Asset</span>
+            <span>Add Asset and Goods</span>
           </Link>
         </div>
       </div>

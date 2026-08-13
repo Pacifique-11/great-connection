@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../api/axiosClient"; // Using your custom configured axios instance
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axiosClient from "../api/axiosClient";
 import WelcomeBanner from '../components/WelcomeBanner';
 
 const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Catches ID if accessed via an admin edit route like /admin-panel/requested-property/:id
+  const { id } = useParams();
 
   const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    status: "",
-    location: "",
-    requesterName: "",
-    contact: "",
-    description: "",
-    bedrooms: "",
-    bathrooms: "",
-    toilets: "",
-    area: "",
-    type: "",
-    image: null,
+    title: "", price: "", status: "", location: "", requesterName: "",
+    contact: "", description: "", bedrooms: "", bathrooms: "",
+    toilets: "", area: "", type: "", image: null,
   });
 
   const [features, setFeatures] = useState([]);
@@ -33,7 +23,6 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
   const activeEditingData = editingRequest || null;
   const isEditing = Boolean(id || activeEditingData);
 
-  // Fetch data if editing via URL parameter and data isn't passed directly
   useEffect(() => {
     if (id && !editingRequest) {
       const fetchRequestDetails = async () => {
@@ -41,25 +30,16 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
           setFetching(true);
           const res = await axiosClient.get(`/request-property/${id}`);
           const data = res.data.request || res.data;
-          
           setFormData({
-            title: data.title || "",
-            price: data.price || "",
-            status: data.status || "",
-            location: data.location || "",
-            requesterName: data.requesterName || "",
-            contact: data.contact || "",
-            description: data.description || "",
-            bedrooms: data.bedrooms || "",
-            bathrooms: data.bathrooms || "",
-            toilets: data.toilets || "",
-            area: data.area || "",
-            type: data.type || "",
-            image: null, // Keep file input clear for updates
+            title: data.title || "", price: data.price || "", status: data.status || "",
+            location: data.location || "", requesterName: data.requesterName || "",
+            contact: data.contact || "", description: data.description || "",
+            bedrooms: data.bedrooms || "", bathrooms: data.bathrooms || "",
+            toilets: data.toilets || "", area: data.area || "", type: data.type || "",
+            image: null,
           });
           setFeatures(data.features || []);
         } catch (err) {
-          console.error("Error fetching request property details:", err);
           setErrorMessage("Failed to load request details.");
         } finally {
           setFetching(false);
@@ -68,18 +48,11 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
       fetchRequestDetails();
     } else if (editingRequest) {
       setFormData({
-        title: editingRequest.title || "",
-        price: editingRequest.price || "",
-        status: editingRequest.status || "",
-        location: editingRequest.location || "",
-        requesterName: editingRequest.requesterName || "",
-        contact: editingRequest.contact || "",
-        description: editingRequest.description || "",
-        bedrooms: editingRequest.bedrooms || "",
-        bathrooms: editingRequest.bathrooms || "",
-        toilets: editingRequest.toilets || "",
-        area: editingRequest.area || "",
-        type: editingRequest.type || "",
+        title: editingRequest.title || "", price: editingRequest.price || "", status: editingRequest.status || "",
+        location: editingRequest.location || "", requesterName: editingRequest.requesterName || "",
+        contact: editingRequest.contact || "", description: editingRequest.description || "",
+        bedrooms: editingRequest.bedrooms || "", bathrooms: editingRequest.bathrooms || "",
+        toilets: editingRequest.toilets || "", area: editingRequest.area || "", type: editingRequest.type || "",
         image: null,
       });
       setFeatures(editingRequest.features || []);
@@ -92,7 +65,7 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
       setFeatureInput("");
     }
   };
-        
+
   const removeFeature = (index) => {
     const updated = [...features];
     updated.splice(index, 1);
@@ -119,57 +92,25 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
         formDataToSend.append(key, formData[key]);
       }
     });
-
-    // Append features array properly to FormData
-    features.forEach((feat) => {
-      formDataToSend.append("features", feat);
-    });
+    features.forEach((feat) => formDataToSend.append("features", feat));
 
     try {
       const targetId = id || activeEditingData?._id || activeEditingData?.id;
-
       if (isEditing && targetId) {
-        // Update request (Admin/Client update)
-        await axiosClient.put(`/request-property/${targetId}`, formDataToSend, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await axiosClient.put(`/request-property/${targetId}`, formDataToSend, { headers: { "Content-Type": "multipart/form-data" } });
         setSuccessMessage("Property request updated successfully!");
       } else {
-        // Create new request
-        await axiosClient.post("/request-property", formDataToSend, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
+        await axiosClient.post("/request-property", formDataToSend, { headers: { "Content-Type": "multipart/form-data" } });
         setSuccessMessage("Your request has been submitted successfully!");
       }
-
       if (onSaved) onSaved();
-
       setTimeout(() => {
-        setSuccessMessage("");
-        if (isEditing && id) {
-          navigate("/admin-panel/requested-property");
-        } else if (!isEditing) {
-          setFormData({
-            title: "",
-            price: "",
-            status: "",
-            location: "",
-            requesterName: "",
-            contact: "",
-            description: "",
-            bedrooms: "",
-            bathrooms: "",
-            toilets: "",
-            area: "",
-            type: "",
-            image: null,
-          });
-          setFeatures([]);
-        }
+        if (isEditing && id) navigate("/admin-panel/requested-property");
+        else setFormData({ title: "", price: "", status: "", location: "", requesterName: "", contact: "", description: "", bedrooms: "", bathrooms: "", toilets: "", area: "", type: "", image: null });
+        setFeatures([]);
       }, 2000);
     } catch (error) {
-      console.error("Error submitting property request:", error);
-      setErrorMessage(error.response?.data?.message || "Failed to submit your request. Please try again.");
+      setErrorMessage(error.response?.data?.message || "Failed to submit request.");
     } finally {
       setLoading(false);
     }
@@ -177,214 +118,91 @@ const RequestProperty = ({ editingRequest = null, onSaved = null }) => {
 
   if (fetching) {
     return (
-      <div className="max-w-3xl mx-auto p-12 text-center bg-white shadow-lg rounded-lg my-10">
+      <div className="max-w-3xl mx-auto p-12 text-center bg-white shadow-xl rounded-2xl my-20 border border-gray-100">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-green-500 border-t-transparent mb-3"></div>
         <p className="text-gray-500 font-medium">Loading request data...</p>
       </div>
     );
   }
 
   return (
-    <>
-      <WelcomeBanner />
-      <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg py-10 my-6">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          {isEditing ? "EDIT PROPERTY REQUEST" : "REQUEST PROPERTY"}
-        </h2>
+    <div className="min-h-screen bg-gray-50">
+      <WelcomeBanner 
+        title={isEditing ? "Edit Request" : "Request a Property"} 
+        subtitle="Specify your requirements and let Great Connection Ltd find the perfect asset for you." 
+      />
 
-        {successMessage && <p className="mb-4 p-3 bg-green-50 text-green-600 rounded text-center font-medium">{successMessage}</p>}
-        {errorMessage && <p className="mb-4 p-3 bg-red-50 text-red-600 rounded text-center font-medium">{errorMessage}</p>}
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              placeholder="Property Title *"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="price"
-              value={formData.price}
-              placeholder="Budget Price *"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-              required
-            />
-            <select 
-              name="status" 
-              value={formData.status} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500 bg-white" 
-              onChange={handleChange}
-            >
-              <option value="">-- Select Status --</option>
-              <option value="Rent">For Rent</option>
-              <option value="Sale">For Sale</option>
-            </select>
-            <input
-              type="text"
-              name="location"
-              value={formData.location}
-              placeholder="Preferred Location *"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="requesterName"
-              value={formData.requesterName}
-              placeholder="Your Name"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="contact"
-              value={formData.contact}
-              placeholder="Contact Number"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="bedrooms"
-              value={formData.bedrooms}
-              placeholder="Minimum Bedrooms"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="bathrooms"
-              value={formData.bathrooms}
-              placeholder="Minimum Bathrooms"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="toilets"
-              value={formData.toilets}
-              placeholder="Minimum Toilets"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="area"
-              value={formData.area}
-              placeholder="Preferred Area (sqm)"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="type"
-              value={formData.type}
-              placeholder="Property Type (e.g. House, Land)"
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-              onChange={handleChange}
-            />
-          </div>
+      <div className="max-w-4xl mx-auto -mt-10 mb-16 px-4 relative z-20">
+        <div className="bg-white shadow-2xl rounded-3xl p-8 md:p-10 border border-gray-100">
+          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight mb-8 border-b border-gray-100 pb-4">
+            {isEditing ? "Edit Request Details" : "Property Request Form"}
+          </h2>
 
-          {/* Features Section */}
-          <div className="w-full">
-            <label className="block font-semibold mb-2 text-sm text-gray-700">Add Features:</label>
-            <div className="flex gap-2 mb-3">
-              <input
-                type="text"
-                className="border p-2.5 flex-grow rounded outline-none focus:ring-2 focus:ring-green-500 text-sm"
-                value={featureInput}
-                onChange={(e) => setFeatureInput(e.target.value)}
-                placeholder="e.g. WiFi, Pool, Security"
-              />
-              <button
-                className="bg-blue-600 text-white px-6 py-2.5 rounded hover:bg-blue-700 text-sm font-semibold transition"
-                onClick={addFeature}
-                type="button"
-              >
-                Add
-              </button>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {features.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-100 border border-gray-200 px-3 py-1 rounded-full flex items-center text-sm text-gray-700"
-                >
-                  <span>{item}</span>
-                  <button
-                    type="button"
-                    className="ml-2 text-red-500 hover:text-red-700 font-bold"
-                    onClick={() => removeFeature(index)}
-                  >
-                    &times;
-                  </button>
+          {successMessage && <div className="mb-6 p-4 bg-emerald-50 text-emerald-700 rounded-xl text-center font-medium border border-emerald-100">{successMessage}</div>}
+          {errorMessage && <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl text-center font-medium border border-red-100">{errorMessage}</div>}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {[
+                { name: 'title', label: 'Property Title *' },
+                { name: 'price', label: 'Budget Price *', type: 'number' },
+                { name: 'location', label: 'Location *' },
+                { name: 'requesterName', label: 'Requester Name' },
+                { name: 'contact', label: 'Contact Number' },
+                { name: 'bedrooms', label: 'Bedrooms', type: 'number' },
+                { name: 'bathrooms', label: 'Bathrooms', type: 'number' },
+                { name: 'toilets', label: 'Toilets', type: 'number' },
+                { name: 'area', label: 'Preferred Area (sqm)' },
+                { name: 'type', label: 'Property Type' }
+              ].map((field) => (
+                <div key={field.name}>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">{field.label}</label>
+                  <input type={field.type || 'text'} name={field.name} value={formData[field.name]} onChange={handleChange} className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" placeholder={field.label} required={field.label.includes('*')} />
                 </div>
               ))}
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Status *</label>
+                <select name="status" value={formData.status} onChange={handleChange} className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" required>
+                  <option value="">-- Select Status --</option>
+                  <option value="Rent">For Rent</option>
+                  <option value="Sale">For Sale</option>
+                </select>
+              </div>
             </div>
-          </div>
 
-          <textarea
-            name="description"
-            value={formData.description}
-            placeholder="Additional Requirements"
-            className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500"
-            rows="4"
-            onChange={handleChange}
-          ></textarea>
+            <div className="w-full">
+              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Add Features</label>
+              <div className="flex gap-2 mb-3">
+                <input type="text" className="border border-gray-300 p-3 flex-grow rounded-xl text-sm outline-none focus:ring-2 focus:ring-green-500" value={featureInput} onChange={(e) => setFeatureInput(e.target.value)} placeholder="e.g. WiFi, Pool" />
+                <button type="button" onClick={addFeature} className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 text-sm font-semibold transition">Add</button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {features.map((item, index) => (
+                  <span key={index} className="bg-green-50 border border-green-200 px-3 py-1 rounded-full text-xs font-medium text-green-800">{item} <button type="button" className="ml-2 text-red-500" onClick={() => removeFeature(index)}>&times;</button></span>
+                ))}
+              </div>
+            </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {isEditing ? "Replace Request Image (Optional)" : "Upload Image"}
-            </label>
-            <input
-              type="file"
-              onChange={handleImageUpload}
-              className="border p-2 rounded w-full bg-white text-sm"
-            />
-          </div>
+            <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Additional Requirements" className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500" rows="4"></textarea>
 
-          <div className="flex gap-4 pt-2">
-            <button
-              type="submit"
-              className={`flex-1 bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700 transition ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={loading}
-            >
-              {loading ? "Saving..." : isEditing ? "Update Request" : "Submit Request"}
+            <button type="submit" disabled={loading} className="w-full bg-green-600 text-white p-4 rounded-xl font-semibold hover:bg-green-700 transition shadow-md">
+              {loading ? "Processing..." : isEditing ? "Update Request" : "Submit Request"}
             </button>
-            
-            {isEditing && (
-              <button
-                type="button"
-                onClick={() => navigate('/admin-panel/requested-property')}
-                className="px-6 bg-gray-300 text-gray-700 p-3 rounded-lg font-semibold hover:bg-gray-400 transition"
-              >
-                Cancel
-              </button>
-            )}
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
 
-      {!isEditing && (
-        <div className="back-to-home flex items-center justify-center flex-col my-6 space-y-2">
-          <p className="text-gray-600 text-sm">Go back to the home page</p>
+      {/*Back to home section like footer*/}
+      <div className="back-to-home flex items-center justify-center flex-col my-10 space-y-2">
+          <p className="text-gray-500 text-sm">Finished here?</p>
           <button
             onClick={() => navigate('/')}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition font-medium text-sm"
+            className="bg-gray-800 text-white px-6 py-2.5 rounded-xl hover:bg-gray-900 transition font-medium text-xs shadow-sm"
           >
-            Back to Home
+            &larr; Back to Home Page
           </button>
         </div>
-      )}
-    </>
+    </div>
   );
 };
 

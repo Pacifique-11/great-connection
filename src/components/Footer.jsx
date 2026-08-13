@@ -43,7 +43,7 @@ const Footer = () => {
             </Link>
           </div>
           <p className="mt-4 text-gray-300 text-sm leading-relaxed">
-            Great Connection Ltd is a trusted real estate and vehicle Trading company, specializing in the buying and selling of houses, land, vehicles , and other valuable assets in Rwanda.
+            Great Connection Ltd is a trusted real estate and vehicle Trading company, Specializing in the buying and selling of houses, land, vehicles, other valuable assets and Goods in Rwanda.
           </p>
           <p className="-mt-2 text-gray-300 text-sm leading-relaxed">
             We are committed to delivering reliable, transparent, and professional services that connect clients with the best investment opportunities
@@ -54,10 +54,19 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block">Quick Links</h3>
           <ul className="mt-4 space-y-3 text-gray-300 text-sm">
-            <li className="hover:text-green-400 cursor-pointer transition">About us</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Terms & Conditions</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Sell property</li>
-            <li className="hover:text-green-400 cursor-pointer transition">Buy property</li>
+            <Link href="#">
+              <li className="hover:text-green-400 cursor-pointer transition">About us</li>
+            </Link>
+            <Link href="#">
+              <li className="hover:text-green-400 cursor-pointer transition">Terms & Conditions</li>
+            </Link>
+            <Link href="/create-supply-property">
+
+              <li className="hover:text-green-400 cursor-pointer transition">Sell property</li>
+            </Link>
+            <Link href="/create-request-property">
+              <li className="hover:text-green-400 cursor-pointer transition">Buy property</li>
+            </Link>
           </ul>
         </div>
 
@@ -99,20 +108,20 @@ const Footer = () => {
       {/* Socials & Copyright */}
       <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex space-x-6 text-xl">
-          <a href="https://www.facebook.com/profile.php?id=61576982134559" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaFacebook /></a>
-          <a href="http://youtube.com/watch?v=8PA9srK8ePI&t=33s" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaYoutube /></a>
-          <a href="https://www.instagram.com/greatconnectionltd" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaInstagram /></a>
-          <a href="https://x.com/greatconection" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaXTwitter /></a>
-          <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaLinkedin /></a>
-          <a href="https://www.tiktok.com/@greatconnectionltd.com" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaTiktok /></a>
+          <Link href="https://www.facebook.com/profile.php?id=61576982134559" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaFacebook /></Link>
+          <Link href="http://youtube.com/watch?v=8PA9srK8ePI&t=33s" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaYoutube /></Link>
+          <Link href="https://www.instagram.com/greatconnectionltd" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaInstagram /></Link>
+          <Link href="https://x.com/greatconection" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaXTwitter /></Link>
+          <Link href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaLinkedin /></Link>
+          <Link href="https://www.tiktok.com/@greatconnectionltd.com" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaTiktok /></Link>
         </div>
         <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Great Connection. All rights reserved.</p>
       </div>
 
       {/* Floating WhatsApp Button */}
-      <a href="https://wa.me/250784008814" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition z-50">
+      <Link href="https://wa.me/250784008814" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition z-50">
         <BsWhatsapp className="text-2xl" />
-      </a>
+      </Link>
     </footer>
   );
 };
