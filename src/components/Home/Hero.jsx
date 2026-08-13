@@ -6,14 +6,13 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full min-h-[200px] md:min-h-[280px] flex items-center justify-center overflow-hidden mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
-      {/* Background Image with Dark Professional Gradient Overlay */}
       <div className="absolute inset-0">
         <img
           src="https://www.greatconnectionltd.com/homeImage.jpg"
           alt="Rwanda Real Estate Landscape"
-          fetchpriority="high"
-          loading="eager" // Changed from 'lazy' to 'eager' so the browser downloads it immediately
-          decoding="async" // Helps the browser render the image without blocking the main thread
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-700 hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
@@ -25,14 +24,14 @@ const HeroSection = () => {
         {/* Welcome Badge */} <div className="mb-5"> 
           <span className="inline-block px-4 py-2 rounded-full bg-green-500/20 border border-green-400/40 text-green-300 text-sm sm:text-base font-semibold backdrop-blur-sm">
             Welcome to Great Connection Ltd </span> </div> {/* Main Title */} 
-        <h1 className="text-1xl capitalize sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-[1.15] sm:leading-[1.2] mb-6 drop-shadow-md">
-          your trusted partner for real estate and
+        <h1 className="text-1xl capitalize sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-[1.15] sm:leading-[1.2] mb-3 drop-shadow-md">
+          your trusted partner for real estate, vehicle Trading,
           <br className="hidden sm:inline" />
           <span className="text-green-400"> 
-            {" "}vehicle trading in Rwanda </span> 
+            {" "}different Assets and Goods in Rwanda </span> 
         </h1> {/* Welcome Content */} 
-        <p className="text-sm sm:text-base md:text-lg text-gray-200 max-w-3xl font-normal leading-relaxed mb-8 drop-shadow">
-        We connect you with reliable opportunities to buy, sell, or find the right property or vehicle that meets your needs. </p>
+        <p className="text-sm sm:text-base md:text-lg text-gray-200 max-w-3xl font-normal leading-relaxed mb-4 drop-shadow">
+        We connect you with reliable opportunities to buy and sell the right property, vehicle, different goods and assets that meets your needs. </p>
 
       </div>
     </section>

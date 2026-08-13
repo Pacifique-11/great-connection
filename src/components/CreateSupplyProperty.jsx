@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../api/axiosClient"; // Uses your configured project axios instance
+import axiosClient from "../api/axiosClient";
 import WelcomeBanner from '../components/WelcomeBanner';
 
 const CreateSupplyProperty = ({ editingSupply = null, onSaved = null }) => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Catches ID if accessed via an admin edit route like /admin-panel/supplied-property/:id
+  const { id } = useParams();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -33,7 +33,6 @@ const CreateSupplyProperty = ({ editingSupply = null, onSaved = null }) => {
   const activeEditingData = editingSupply || null;
   const isEditing = Boolean(id || activeEditingData);
 
-  // Fetch supply details if editing via URL param and data wasn't passed as a prop
   useEffect(() => {
     if (id && !editingSupply) {
       const fetchSupplyDetails = async () => {
@@ -121,7 +120,6 @@ const CreateSupplyProperty = ({ editingSupply = null, onSaved = null }) => {
         }
       });
 
-      // Append all features array items explicitly
       features.forEach((feat) => {
         data.append("features", feat);
       });
@@ -129,13 +127,11 @@ const CreateSupplyProperty = ({ editingSupply = null, onSaved = null }) => {
       const targetId = id || activeEditingData?._id || activeEditingData?.id;
 
       if (isEditing && targetId) {
-        // Update supply property (PUT)
         await axiosClient.put(`/supply-property/${targetId}`, data, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         setSuccessMessage("Supply property updated successfully!");
       } else {
-        // Create new supply property (POST)
         await axiosClient.post("/supply-property", data, {
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -178,218 +174,279 @@ const CreateSupplyProperty = ({ editingSupply = null, onSaved = null }) => {
 
   if (fetching) {
     return (
-      <div className="max-w-3xl mx-auto p-12 text-center bg-white shadow-lg rounded-lg my-10">
+      <div className="max-w-3xl mx-auto p-12 text-center bg-white shadow-xl rounded-2xl my-20 border border-gray-100">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-green-500 border-t-transparent mb-3"></div>
         <p className="text-gray-500 font-medium">Loading supply item data...</p>
       </div>
     );
   }
 
   return (
-    <>
-      <WelcomeBanner />
-      <div className="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-lg rounded-lg py-10">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          {isEditing ? "EDIT SUPPLY PROPERTY" : "SUPPLY PROPERTY"}
-        </h2>
-        {successMessage && <p className="mb-4 p-3 bg-green-50 text-green-600 rounded text-center font-medium">{successMessage}</p>}
-        {errorMessage && <p className="mb-4 p-3 bg-red-50 text-red-600 rounded text-center font-medium">{errorMessage}</p>}
+    <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
+      <div>
+        {/* Modernized Welcome Banner Integration */}
+        <WelcomeBanner 
+          title={isEditing ? "Edit Supply Listing" : "Supply a Property or Asset"} 
+          subtitle="Publish your real estate property or vehicle listing to connect with active buyers and renters instantly." 
+        />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input 
-              type="text" 
-              name="title" 
-              value={formData.title} 
-              placeholder="Property Title *" 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              onChange={handleChange} 
-              required 
-            />
-            <input 
-              type="text" 
-              name="owner" 
-              value={formData.owner} 
-              placeholder="Owner Name *" 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              onChange={handleChange} 
-              required 
-            />
-            <input 
-              type="text" 
-              name="location" 
-              value={formData.location} 
-              placeholder="Location *" 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              onChange={handleChange} 
-              required 
-            />
-            <input 
-              type="tel" 
-              name="contact" 
-              value={formData.contact} 
-              className="w-full border p-2.5 rounded outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Contact Number *" 
-              onChange={handleChange} 
-              required 
-            />
-            <select 
-              name="status" 
-              value={formData.status} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500 bg-white" 
-              onChange={handleChange}
-              required
-            >
-              <option value="">-- Select Status --</option>
-              <option value="Rent">For Rent</option>
-              <option value="Sale">For Sale</option>
-              <option value="Available">Available</option>
-            </select>
-            <input 
-              type="number" 
-              name="price" 
-              value={formData.price} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Price *" 
-              onChange={handleChange} 
-              required 
-            />
-            <input 
-              type="number" 
-              name="bedrooms" 
-              value={formData.bedrooms} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Bedrooms (if applicable)" 
-              onChange={handleChange} 
-            />
-            <input 
-              type="number" 
-              name="bathrooms" 
-              value={formData.bathrooms} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Bathrooms (if applicable)" 
-              onChange={handleChange} 
-            />
-            <input 
-              type="number" 
-              name="toilets" 
-              value={formData.toilets} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Toilets (if applicable)" 
-              onChange={handleChange} 
-            />
-            <input 
-              type="text" 
-              name="area" 
-              value={formData.area} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Area (sqm)" 
-              onChange={handleChange} 
-            />
-            <input 
-              type="text" 
-              name="type" 
-              value={formData.type} 
-              className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-              placeholder="Property Type (House, Land, Vehicle, etc.)" 
-              onChange={handleChange} 
-            />
-          </div>
-
-          {/* Features Section */}
-          <div className="w-full">
-            <label className="block font-semibold mb-2 text-sm text-gray-700">Add Features:</label>
-            <div className="flex gap-2 mb-3">
-              <input
-                type="text"
-                className="border p-2.5 flex-grow rounded outline-none focus:ring-2 focus:ring-green-500 text-sm"
-                value={feature}
-                onChange={(e) => setFeature(e.target.value)}
-                placeholder="e.g. WiFi, Pool, Solar Power"
-              />
-              <button
-                className="bg-blue-600 text-white px-6 py-2.5 rounded hover:bg-blue-700 text-sm font-semibold transition"
-                onClick={addFeature}
-                type="button"
-              >
-                Add
-              </button>
+        <div className="max-w-4xl mx-auto -mt-10 mb-16 px-4 relative z-20">
+          <div className="bg-white shadow-2xl rounded-3xl p-8 md:p-10 border border-gray-100">
+            <div className="mb-8 border-b border-gray-100 pb-4">
+              <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+                {isEditing ? "Edit Supplied Property Details" : "Property Supply Form"}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">Please provide accurate information regarding the asset or property.</p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {features.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-100 border border-gray-200 px-3 py-1 rounded-full flex items-center text-sm text-gray-700"
-                >
-                  <span>{item}</span>
-                  <button
-                    type="button"
-                    className="ml-2 text-red-500 hover:text-red-700 font-bold"
-                    onClick={() => removeFeature(index)}
+
+            {successMessage && <div className="mb-6 p-4 bg-emerald-50 text-emerald-700 rounded-xl text-center font-medium border border-emerald-100">{successMessage}</div>}
+            {errorMessage && <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl text-center font-medium border border-red-100">{errorMessage}</div>}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Property Title *</label>
+                  <input 
+                    type="text" 
+                    name="title" 
+                    value={formData.title} 
+                    placeholder="e.g. Modern Villa in Nyarutarama" 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Owner / Supplier Name *</label>
+                  <input 
+                    type="text" 
+                    name="owner" 
+                    value={formData.owner} 
+                    placeholder="Full Name" 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Location *</label>
+                  <input 
+                    type="text" 
+                    name="location" 
+                    value={formData.location} 
+                    placeholder="e.g. Kigali, Gasabo" 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Contact Number *</label>
+                  <input 
+                    type="tel" 
+                    name="contact" 
+                    value={formData.contact} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. +250 780 000 000" 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Listing Status *</label>
+                  <select 
+                    name="status" 
+                    value={formData.status} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    onChange={handleChange}
+                    required
                   >
-                    &times;
+                    <option value="">-- Select Status --</option>
+                    <option value="Rent">For Rent</option>
+                    <option value="Sale">For Sale</option>
+                    <option value="Available">Available</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Price (RWF) *</label>
+                  <input 
+                    type="number" 
+                    name="price" 
+                    value={formData.price} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. 500000" 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Bedrooms</label>
+                  <input 
+                    type="number" 
+                    name="bedrooms" 
+                    value={formData.bedrooms} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. 3" 
+                    onChange={handleChange} 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Bathrooms</label>
+                  <input 
+                    type="number" 
+                    name="bathrooms" 
+                    value={formData.bathrooms} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. 2" 
+                    onChange={handleChange} 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Toilets</label>
+                  <input 
+                    type="number" 
+                    name="toilets" 
+                    value={formData.toilets} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. 3" 
+                    onChange={handleChange} 
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Area Size</label>
+                  <input 
+                    type="text" 
+                    name="area" 
+                    value={formData.area} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. 250 sqm" 
+                    onChange={handleChange} 
+                  />
+                </div>
+
+                <div className="col-span-full">
+                  <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Property / Asset Type</label>
+                  <input 
+                    type="text" 
+                    name="type" 
+                    value={formData.type} 
+                    className="border border-gray-300 p-3 rounded-xl w-full text-sm outline-none focus:ring-2 focus:ring-green-500 bg-white" 
+                    placeholder="e.g. House, Land, Car, Motorcycle" 
+                    onChange={handleChange} 
+                  />
+                </div>
+              </div>
+
+              {/* Features Section */}
+              <div className="w-full pt-2">
+                <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Add Key Features</label>
+                <div className="flex gap-2 mb-3">
+                  <input
+                    type="text"
+                    className="border border-gray-300 p-3 flex-grow rounded-xl outline-none focus:ring-2 focus:ring-green-500 text-sm bg-white"
+                    value={feature}
+                    onChange={(e) => setFeature(e.target.value)}
+                    placeholder="e.g. WiFi, Swimming Pool, Backup Generator"
+                  />
+                  <button
+                    className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 text-sm font-semibold transition shadow-sm"
+                    onClick={addFeature}
+                    type="button"
+                  >
+                    Add Feature
                   </button>
                 </div>
-              ))}
-            </div>
-          </div> 
+                <div className="flex flex-wrap gap-2">
+                  {features.map((item, index) => (
+                    <div
+                      key={index}
+                      className="bg-green-50 border border-green-200 px-3.5 py-1.5 rounded-full flex items-center text-xs font-medium text-green-800 shadow-2xs"
+                    >
+                      <span>{item}</span>
+                      <button
+                        type="button"
+                        className="ml-2 text-red-500 hover:text-red-700 font-bold text-sm leading-none"
+                        onClick={() => removeFeature(index)}
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div> 
 
-          <textarea 
-            name="description" 
-            value={formData.description} 
-            placeholder="Property Description" 
-            className="border p-2.5 rounded w-full outline-none focus:ring-2 focus:ring-green-500" 
-            rows="4"
-            onChange={handleChange}
-          ></textarea>
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Detailed Description</label>
+                <textarea 
+                  name="description" 
+                  value={formData.description} 
+                  placeholder="Describe your property attributes, neighborhood benefits, or vehicle condition..." 
+                  className="border border-gray-300 p-3 rounded-xl w-full outline-none focus:ring-2 focus:ring-green-500 text-sm bg-white" 
+                  rows="4"
+                  onChange={handleChange}
+                ></textarea>
+              </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {isEditing ? "Replace Property Image (Optional)" : "Upload Property Image"}
-            </label>
-            <input 
-              type="file" 
-              onChange={handleImageUpload} 
-              name="image" 
-              className="border p-2 rounded w-full cursor-pointer bg-white text-sm" 
-            />
+              <div>
+                <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">
+                  {isEditing ? "Replace Property Image (Optional)" : "Upload Property Image *"}
+                </label>
+                <input 
+                  type="file" 
+                  onChange={handleImageUpload} 
+                  name="image" 
+                  className="border border-gray-300 p-2.5 rounded-xl w-full cursor-pointer bg-white text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100" 
+                  required={!isEditing}
+                />
+              </div>
+
+              <div className="flex items-center gap-4 pt-4 border-t border-gray-100">
+                <button 
+                  type="submit" 
+                  className={`flex-1 bg-green-600 text-white p-3.5 rounded-xl font-semibold hover:bg-green-700 transition shadow-md text-sm ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                  disabled={loading}
+                >
+                  {loading ? "Saving Supply..." : isEditing ? "Update Supply Property" : "Submit Supply Listing"}
+                </button>
+
+                {isEditing && (
+                  <button
+                    type="button"
+                    onClick={() => navigate('/admin-panel/supplied-property')}
+                    className="px-6 bg-gray-100 text-gray-700 p-3.5 rounded-xl font-semibold hover:bg-gray-200 transition text-sm"
+                  >
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
-
-          <div className="flex gap-4 pt-2">
-            <button 
-              type="submit" 
-              className={`flex-1 bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700 transition ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              disabled={loading}
-            >
-              {loading ? "Saving..." : isEditing ? "Update Supply" : "Submit Supply"}
-            </button>
-
-            {isEditing && (
-              <button
-                type="button"
-                onClick={() => navigate('/admin-panel/supplied-property')}
-                className="px-6 bg-gray-300 text-gray-700 p-3 rounded-lg font-semibold hover:bg-gray-400 transition"
-              >
-                Cancel
-              </button>
-            )}
-          </div>
-        </form>
+        </div>
       </div>
 
       {!isEditing && (
-        <div className="back-to-home flex items-center justify-center flex-col my-6 space-y-2">
-          <p className="text-gray-600 text-sm">Go back to the home page</p>
+        <div className="back-to-home flex items-center justify-center flex-col my-10 space-y-2">
+          <p className="text-gray-500 text-sm">Finished here?</p>
           <button
             onClick={() => navigate('/')}
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition font-medium text-sm"
+            className="bg-gray-800 text-white px-6 py-2.5 rounded-xl hover:bg-gray-900 transition font-medium text-xs shadow-sm"
           >
-            Back to Home
+            &larr; Back to Home Page
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

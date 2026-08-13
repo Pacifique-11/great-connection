@@ -9,14 +9,14 @@ import { NavBar } from "./NavBar";
 
 // Fetcher functions for TanStack Query
 const fetchProperties = async () => {
-  const res = await fetch('https://greatconnectionltd.onrender.com/api/properties');
+  const res = await fetch('https://greatconnectionltd.onrender.com/api/get-properties');
   if (!res.ok) throw new Error('Failed to fetch properties');
   const propData = await res.json();
   return Array.isArray(propData) ? propData : propData.properties || propData.data || propData.items || [];
 };
 
 const fetchAssets = async () => {
-  const res = await fetch('https://greatconnectionltd.onrender.com/api/assets');
+  const res = await fetch('https://greatconnectionltd.onrender.com/api/property-asset');
   if (!res.ok) throw new Error('Failed to fetch assets');
   const assetData = await res.json();
   return Array.isArray(assetData) ? assetData : assetData.assets || assetData.data || assetData.items || [];
@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     const pingServer = async () => {
       try {
-        await fetch('https://greatconnectionltd.onrender.com/api/assets', { method: 'HEAD' });
+        await fetch('https://greatconnectionltd.onrender.com/api/property-asset', { method: 'HEAD' });
       } catch (error) {
         // Suppress network errors during cold starts
       }
