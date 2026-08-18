@@ -14,13 +14,6 @@ const GetAssetPropertyByType = () => {
 
   useEffect(() => {
     const fetchAssets = async () => {
-      // Prevent fetching if type is "Other" or invalid to avoid 404s
-      if (!type || type.toLowerCase() === "other") {
-        setAssets([]);
-        setLoading(false);
-        return;
-      }
-
       try {
         setLoading(true);
         setError('');
@@ -35,7 +28,6 @@ const GetAssetPropertyByType = () => {
         setAssets(fetchedData);
       } catch (err) {
         console.error("Failed to fetch assets:", err);
-        // If it's a 404, show an empty state instead of a hard error message
         if (err.response && err.response.status === 404) {
           setAssets([]);
         } else {
@@ -56,13 +48,13 @@ const GetAssetPropertyByType = () => {
   return (
     <>
       <NavBar />
-      <section className="bg-gray-100 min-h-screen pt-24 pb-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <header className="mb-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-800">
+      <section className="bg-gray-50 min-h-screen pt-28 pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <header className="mb-10 text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
               {displayType} Listings
             </h2>
-            <p className="text-sm text-gray-500 mt-1">Explore all available asset listings for {displayType}</p>
+            <p className="text-sm text-gray-500 mt-2">Explore all available asset listings for {displayType}</p>
           </header>
 
           {loading ? (
@@ -70,15 +62,15 @@ const GetAssetPropertyByType = () => {
               {[1, 2, 3, 4, 5, 6].map((n) => (
                 <div 
                   key={n} 
-                  className="bg-white rounded-xl shadow-md p-5 animate-pulse flex flex-col justify-between"
+                  className="bg-white rounded-2xl shadow-sm p-5 animate-pulse flex flex-col justify-between border border-gray-100"
                 >
-                  <div className="w-full h-48 bg-gray-200 rounded-md mb-4"></div>
+                  <div className="w-full h-52 bg-gray-200 rounded-xl mb-4"></div>
                   <div className="space-y-3">
                     <div className="h-6 bg-gray-200 rounded w-3/4"></div>
                     <div className="h-4 bg-gray-200 rounded w-1/2"></div>
                     <div className="h-3 bg-gray-200 rounded w-5/6"></div>
                     <div className="h-3 bg-gray-200 rounded w-2/3"></div>
-                    <div className="h-10 bg-gray-200 rounded-lg w-full mt-4"></div>
+                    <div className="h-10 bg-gray-200 rounded-xl w-full mt-4"></div>
                   </div>
                 </div>
               ))}
@@ -88,39 +80,45 @@ const GetAssetPropertyByType = () => {
               {error}
             </div>
           ) : assets.length === 0 ? (
-            <div className="text-center py-20 bg-white rounded-xl shadow-sm max-w-lg mx-auto">
-              <h3 className="text-xl font-semibold text-gray-700">No Assets Found</h3>
-              <p className="text-gray-500 text-sm mt-2">No assets available for this category right now.</p>
+            <div className="text-center py-20 bg-white rounded-2xl shadow-sm max-w-md mx-auto border border-gray-100 p-8">
+              <h3 className="text-xl font-semibold text-gray-800">No Assets Found</h3>
+              <p className="text-gray-500 text-sm mt-2">No assets are currently available for this category right now.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {assets.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-5 flex flex-col justify-between border border-gray-100"
+                  className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-5 flex flex-col justify-between border border-gray-100 group"
                 >
                   <div>
-                    <div className="relative">
+                    {/* Clear & Responsive Image Container */}
+                    <div className="relative w-full h-56 bg-gray-100 rounded-xl overflow-hidden mb-4 shadow-inner">
                       <img
-                        src={item.image || "https://via.placeholder.com/150"}
+                        src={item.image || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800"}
                         alt={item.name || "Asset Image"}
-                        className="w-full h-48 object-cover rounded-md mb-4"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.target.src = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800";
+                        }}
                       />
-                      <span className="absolute top-2 right-2 bg-black text-white text-xs px-2.5 py-1 rounded-md font-medium">
+                      <span className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white text-xs px-3 py-1 rounded-lg font-semibold tracking-wide">
                         {item.status}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2 truncate">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1 truncate group-hover:text-green-600 transition-colors">
                       {item.name}
                     </h3>
-                    <p className="text-green-600 font-bold text-lg mb-3">
+                    
+                    <p className="text-green-600 font-extrabold text-lg mb-3">
                       {item.price?.toString().startsWith('RWF') || item.price?.toString().startsWith('RwF')
                         ? item.price
                         : `RWF ${item.price}`}
                     </p>
 
-                    <div className="space-y-1.5 text-sm text-gray-600 border-t pt-3 border-gray-100">
+                    <div className="space-y-1.5 text-xs text-gray-600 border-t pt-3 border-gray-100">
                       {item.owner && (
                         <p><strong className="text-gray-700">Owner:</strong> {item.owner}</p>
                       )}
@@ -136,13 +134,13 @@ const GetAssetPropertyByType = () => {
                   <div>
                     <button
                       onClick={() => handleViewDetails(item._id)}
-                      className="mt-5 w-full bg-green-500 text-white py-2.5 rounded-lg hover:bg-green-600 transition-colors font-medium cursor-pointer"
+                      className="mt-5 w-full bg-green-600 text-white py-3 rounded-xl hover:bg-green-700 transition-all font-semibold text-sm shadow-sm cursor-pointer"
                     >
                       View Details
                     </button>
 
                     {item.timeAgo && (
-                      <p className="text-xs text-gray-400 mt-3 text-right">Posted: {item.timeAgo}</p>
+                      <p className="text-xs text-gray-400 mt-3 text-right">Posted {item.timeAgo}</p>
                     )}
                   </div>
                 </div>
