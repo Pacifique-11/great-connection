@@ -14,7 +14,7 @@ export default function RequestedProperties() {
   useEffect(() => {
     const fetchRequestedProperties = async () => {
       try {
-        const response = await axios.get("https://easy-renting-bn.onrender.com/api/request-property");
+        const response = await axios.get("https://greatconnectionltd.onrender.com/api/request-property");
         setRequestedProperties(response.data.data);
       } catch (err) {
         console.error("Error fetching requested properties:", err);

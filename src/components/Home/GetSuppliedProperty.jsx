@@ -10,7 +10,7 @@ const SuppliedProperties = () => {
   useEffect(() => {
     const fetchSuppliedProperties = async () => {
       try {
-        const res = await axios.get("https://easy-renting-bn.onrender.com/api/get-all-property", {
+        const res = await axios.get("https://greatconnectionltd.onrender.com/api/get-all-property", {
           headers: { "Content-Type": "application/json" },
         });
         setProperties(res.data.data);

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-  baseURL: 'https://easy-renting-bn.onrender.com/api', 
+  baseURL: 'https://greatconnectionltd.onrender.com/api', 
   withCredentials: true, 
 });
 

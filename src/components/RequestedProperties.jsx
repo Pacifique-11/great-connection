@@ -9,7 +9,7 @@ const RequestedProperties = () => {
   useEffect(() => {
     const fetchRequestedProperties = async () => {
       try {
-        const response = await axios.get("https://easy-renting-bn.onrender.com/api/request-property"); // Replace with your API endpoint
+        const response = await axios.get("https://greatconnectionltd.onrender.com/api/request-property"); // Replace with your API endpoint
         console.log("API Response:", response.data.data);
         setRequestedProperties(response.data.data); // Update state with fetched data
       } catch (err) {

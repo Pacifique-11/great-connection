@@ -12,7 +12,7 @@ const RequestedPropertyDetail = () => {
     const fetchPropertyDetails = async () => {
       try {
         console.log("Fetching property with ID:", id); // Debugging log
-        const response = await axios.get(`https://easy-renting-bn.onrender.com/api/request-property/${id}`);
+        const response = await axios.get(`https://greatconnectionltd.onrender.com/api/request-property/${id}`);
         console.log("API Response:", response.data); // Debugging log
         setProperty(response.data);
       } catch (err) {

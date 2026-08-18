@@ -15,7 +15,7 @@ const SupplyProperty = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get('https://easy-renting-bn.onrender.com/api/supply-property');
+        const response = await axios.get('https://greatconnectionltd.onrender.com/api/supply-property');
         console.log('API Response:', response.data);
         setProperties(response.data?.data || []);
       } catch (err) {

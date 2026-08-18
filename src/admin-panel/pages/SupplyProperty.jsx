@@ -43,7 +43,19 @@ const SupplyProperty = () => {
     }
   };
 
-  if (loading) return <div className="text-center py-10">Loading properties...</div>;
+  //handle empty state
+  if (!loading && properties.length === 0) {
+    return (
+      <MainLayout>
+        <div className="text-center py-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">No Supplied Properties Found</h2>
+          <p className="text-gray-600">There are currently no supplied properties available.</p>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  // Handle error state
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;
 
   return (

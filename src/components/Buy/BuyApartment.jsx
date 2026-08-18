@@ -12,7 +12,7 @@ const BuyApartment = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("https://easy-renting-bn.onrender.com/api/get-properties"); 
+        const response = await axios.get("https://greatconnectionltd.onrender.com/api/get-properties"); 
         setProperties(response.data); 
       } catch (err) {
         console.error("Error fetching property data:", err);

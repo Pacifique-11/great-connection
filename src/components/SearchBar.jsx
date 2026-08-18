@@ -8,7 +8,7 @@ function SearchBar() {
 
   useEffect(() => {
     const fetchResults = async () => {
-      const res = await fetch(`https://easy-renting-bn.onrender.com/api/search?q=${encodeURIComponent(query)}`);
+      const res = await fetch(`https://greatconnectionltd.onrender.com/api/search?q=${encodeURIComponent(query)}`);
       const data = await res.json();
       setResults(data);
     };
