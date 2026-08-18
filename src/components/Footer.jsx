@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import React, { useState } from 'react';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTiktok, FaYoutube, FaXTwitter } from "react-icons/fa6";
 import { IoLocationSharp, IoMail, IoCall } from "react-icons/io5";
@@ -35,7 +34,6 @@ const Footer = () => {
 
         {/* Brand Info */}
         <div className="space-y-4">
-          {/* Logo Added Here */}
           <div className="flex items-center gap-2">
             <img src="https://www.greatconnectionltd.com/Logo.png" alt="Logo" className="rounded-full h-9 w-auto object-contain" onError={(e) => { e.target.style.display = 'none'; }} />
             <Link to="/" className="text-lg md:text-xl font-extrabold text-green-700 tracking-wider">
@@ -45,36 +43,24 @@ const Footer = () => {
           <p className="mt-4 text-gray-300 text-sm leading-relaxed">
             Great Connection Ltd is a trusted real estate and vehicle Trading company, Specializing in the buying and selling of houses, land, vehicles, other valuable assets and Goods in Rwanda.
           </p>
-          <p className="-mt-2 text-gray-300 text-sm leading-relaxed">
-            We are committed to delivering reliable, transparent, and professional services that connect clients with the best investment opportunities
-          </p>
         </div>
 
         {/* Quick Links */}
         <div>
           <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block">Quick Links</h3>
           <ul className="mt-4 space-y-3 text-gray-300 text-sm">
-            <Link href="#">
-              <li className="hover:text-green-400 cursor-pointer transition">About us</li>
-            </Link>
-            <Link href="#">
-              <li className="hover:text-green-400 cursor-pointer transition">Terms & Conditions</li>
-            </Link>
-            <Link href="/create-supply-property">
-
-              <li className="hover:text-green-400 cursor-pointer transition">Sell property</li>
-            </Link>
-            <Link href="/create-request-property">
-              <li className="hover:text-green-400 cursor-pointer transition">Buy property</li>
-            </Link>
+            <li><Link to="#" className="hover:text-green-400 transition">About us</Link></li>
+            <li><Link to="#" className="hover:text-green-400 transition">Terms & Conditions</Link></li>
+            <li><Link to="/create-supply-property" className="hover:text-green-400 transition">Sell property</Link></li>
+            <li><Link to="/create-request-property" className="hover:text-green-400 transition">Buy property</Link></li>
           </ul>
         </div>
 
         {/* Newsletter & Contact */}
         <div className="space-y-8">
           <div>
-            <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block"> Subscribe to Our Newsletter</h3>
-            <form onSubmit={handleSubmit} className="mt-4 flex items-center justify-center gap-2">
+            <h3 className="text-xl font-semibold border-b-2 border-green-700 pb-2 inline-block">Newsletter</h3>
+            <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-2">
               <input
                 type="email"
                 required
@@ -86,7 +72,7 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="-ml-4 md:ml-0 w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50"
+                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50"
               >
                 {loading ? 'Subscribing...' : 'Subscribe'}
               </button>
@@ -108,20 +94,20 @@ const Footer = () => {
       {/* Socials & Copyright */}
       <div className="mt-12 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex space-x-6 text-xl">
-          <Link href="https://www.facebook.com/profile.php?id=61576982134559" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaFacebook /></Link>
-          <Link href="http://youtube.com/watch?v=8PA9srK8ePI&t=33s" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaYoutube /></Link>
-          <Link href="https://www.instagram.com/greatconnectionltd" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaInstagram /></Link>
-          <Link href="https://x.com/greatconection" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaXTwitter /></Link>
-          <Link href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaLinkedin /></Link>
-          <Link href="https://www.tiktok.com/@greatconnectionltd.com" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaTiktok /></Link>
+          <a href="https://www.facebook.com/profile.php?id=61576982134559" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaFacebook /></a>
+          <a href="http://youtube.com/watch?v=8PA9srK8ePI&t=33s" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaYoutube /></a>
+          <a href="https://www.instagram.com/greatconnectionltd" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaInstagram /></a>
+          <a href="https://x.com/greatconection" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaXTwitter /></a>
+          <a href="https://www.linkedin.com/in/great-connection-ltd-21b0a636a" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaLinkedin /></a>
+          <a href="https://www.tiktok.com/@greatconnectionltd.com" target="_blank" rel="noreferrer" className="hover:text-green-500 transition"><FaTiktok /></a>
         </div>
         <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} Great Connection. All rights reserved.</p>
       </div>
 
       {/* Floating WhatsApp Button */}
-      <Link href="https://wa.me/250784008814" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition z-50">
+      <a href="https://wa.me/250784008814" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition z-50">
         <BsWhatsapp className="text-2xl" />
-      </Link>
+      </a>
     </footer>
   );
 };
